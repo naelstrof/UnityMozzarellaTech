@@ -1,0 +1,58 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> Result;
+#include "UnityCG.cginc"
+Texture2D<float4> _DepthTexture;
+float4x4 _WorldToCamera;
+float4x4 _CameraToWorld;
+float4x4 _CameraInverseProjection;
+float4x4 _CameraProjection;
+float4x4 _ViewProjection;
+float _NearClipValue;
+float _FarClipValue;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID) {
+    uint width,height;
+    Result.GetDimensions(width, height);
+    uint swidth, sheight;
+    _DepthTexture.GetDimensions(swidth, sheight);
+    uint2 sourceid = uint2(((float2(id.xy) / float2(width,height))*float2(swidth,sheight)).xy);
+
+    float4 testPos = float4(0,0,0,1);
+    float4 testuv = mul(_ViewProjection,testPos);
+    testuv = testuv/testuv.w;
+    float2 realuv = float2(testuv.xy)*0.5+0.5;
+
+    float4 testViewVector = mul(_CameraInverseProjection, float4(testuv.xy, 0, -1));
+    float3 testRayLength = mul(_CameraToWorld, float4(testViewVector.xyz,0)).xyz;
+    float testnonlin_depth = _DepthTexture[realuv*uint2(swidth,sheight)].r;
+    float testScreenDist = LinearEyeDepth(testnonlin_depth) * length(testRayLength);
+
+    float2 uv = id.xy / float2(swidth,sheight) * 2.0 - 1.0;
+    // I use these two matrix multiplications to correct for distortion at the edges of the screen.
+    // I don't really know how they work and there's probably a simpler way to do so.
+    float4 viewVector = mul(_CameraInverseProjection, float4(uv, 0, -1));
+    float3 rayLength = mul(_CameraToWorld, float4(viewVector.xyz,0)).xyz;
+    float nonlin_depth = _DepthTexture[sourceid.xy].r;
+    float screenDist = LinearEyeDepth(nonlin_depth) * length(rayLength);
+    if (nonlin_depth == 0 || nonlin_depth == 1) {
+        screenDist = 10000;
+    }
+    float rep = frac(screenDist);
+
+    // Depth test
+    if (sourceid.x == uint(realuv.x*swidth) || sourceid.y == uint(realuv.y*sheight)) {
+        Result[id.xy] = float4(0,1,0,1);
+    } else {
+        if (abs(testScreenDist-screenDist) < 1) {
+            Result[id.xy] = float4(1,0,0,1);
+        //Crosshair test
+        } else {
+            Result[id.xy] = float4(rep,rep,rep,1);
+        }
+    }
+}
