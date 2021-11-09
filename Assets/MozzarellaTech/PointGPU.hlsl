@@ -14,8 +14,10 @@ void ConfigureProcedural () {
 		Point p = _Points[unity_InstanceID];
 
 		unity_ObjectToWorld = 0.0;
+		// Set the XYZ translation on the matrix
 		unity_ObjectToWorld._m03_m13_m23_m33 = float4(p.position.xyz, 1.0);
-		unity_ObjectToWorld._m00_m11_m22 = p.volume;
+		// Set the XYZ scale on the matrix
+		unity_ObjectToWorld._m00_m11_m22 = p.volume*0.2f;
 	#endif
 }
 

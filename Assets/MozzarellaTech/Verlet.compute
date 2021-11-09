@@ -1,6 +1,14 @@
 // Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel PointsMain
-#pragma kernel SticksMain
+#include "UnityCG.cginc"
+Texture2D<float4> _DepthTexture;
+float4x4 _WorldToCamera;
+float4x4 _CameraToWorld;
+float4x4 _CameraInverseProjection;
+float4x4 _CameraProjection;
+float4x4 _ViewProjection;
+float _NearClipValue;
+float _FarClipValue;
 
 struct Point {
     float3 position;
@@ -27,12 +35,53 @@ float hash13(float3 p3) {
     p3 += dot(p3, p3.zyx + 31.32);
     return frac((p3.x + p3.y) * p3.z);
 }
+void StartPointCalc(inout Point p) {
+    p.savedPosition = p.position;
+}
+void FinishPointCalc(inout Point p) {
+    p.prevPosition = p.savedPosition;
+}
 
 void ComputePoint(inout Point p) {
-    p.savedPosition = p.position;
     p.position += (p.position - p.prevPosition)*0.99;
-    p.position += _Gravity * _DeltaTime;
-    p.position.y = max(p.position.y,0);
+    p.position += _Gravity * _DeltaTime * _DeltaTime;
+    //p.position.y = max(p.position.y,0);
+}
+
+
+void DepthCollide(inout Point p) {
+    // World position -> [0,1) camera space
+    uint width, height;
+    _DepthTexture.GetDimensions(width, height);
+
+    // Need the full view projection matrix to figure out where the point lays in texture space.
+    float4 uv = mul(_ViewProjection, float4(p.position,1));
+    uv = uv/uv.w;
+    float2 realuv = float2(uv.xy)*0.5+0.5;
+    if (realuv.x < 0 || realuv.y < 0 || realuv.y > 1 || realuv.x > 1) {
+        return;
+    }
+
+    // This is how I correct for depth buffer ray distortion, there's probably a more efficent way
+    float4 viewVector = mul(_CameraInverseProjection, float4(uv.xy, 0, -1));
+    float3 rayLength = mul(_CameraToWorld, float4(viewVector.xyz,0)).xyz;
+    // Of course, textures in compute shaders don't take normalized uvs, so we need the screen size...
+    float nonlin_depth = _DepthTexture[realuv*uint2(width,height)].r;
+
+    // the start and end clipping plane have fucked up depth data, so we try to ignore it.
+    if (nonlin_depth == 0 || nonlin_depth == 1) {
+        return;
+    }
+
+    float screenDist = LinearEyeDepth(nonlin_depth) * length(rayLength);
+
+    float3 camWS = mul(_CameraToWorld, float4(0,0,0,1)).xyz;
+    float3 dir = p.position-camWS;
+    if (screenDist < length(dir)) {
+        p.position = (normalize(dir)*screenDist)+camWS;
+        p.prevPosition = p.position;
+        p.savedPosition = p.position;
+    }
 }
 
 void ComputeStick(inout Point a, Point b) {
@@ -50,12 +99,10 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
         int lastID = (id.x+1)%_NumParticles;
         _Points[lastID].volume = 0;
     }
+    StartPointCalc(_Points[id.x]);
+    DepthCollide(_Points[id.x]);
     ComputePoint(_Points[id.x]);
-}
-
-[numthreads(64,1,1)]
-void SticksMain (uint3 id : SV_DispatchThreadID) {
     ComputeStick(_Points[id.x], _Points[(id.x+1)%(_NumParticles)]);
     ComputeStick(_Points[id.x], _Points[(id.x-1+_NumParticles)%(_NumParticles)]);
-    _Points[id.x].prevPosition = _Points[id.x].savedPosition;
+    FinishPointCalc(_Points[id.x]);
 }
