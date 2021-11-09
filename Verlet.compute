@@ -1,0 +1,61 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel PointsMain
+#pragma kernel SticksMain
+
+struct Point {
+    float3 position;
+    float3 prevPosition;
+    float3 savedPosition;
+    float volume;
+};
+
+float3 _Gravity;
+
+float3 _SquirtPosition;
+float3 _SquirtVelocity;
+float _SquirtVolume;
+uint _SquirtIndex;
+
+float _DeltaTime;
+float _Length;
+uint _NumParticles;
+
+RWStructuredBuffer<Point> _Points;
+
+float hash13(float3 p3) {
+	p3 = frac(p3 * .1031);
+    p3 += dot(p3, p3.zyx + 31.32);
+    return frac((p3.x + p3.y) * p3.z);
+}
+
+void ComputePoint(inout Point p) {
+    p.savedPosition = p.position;
+    p.position += (p.position - p.prevPosition)*0.99;
+    p.position += _Gravity * _DeltaTime;
+    p.position.y = max(p.position.y,0);
+}
+
+void ComputeStick(inout Point a, Point b) {
+    float3 stickCenter = (a.position + b.position)*0.5;
+    float3 stickDir = normalize(a.position - b.position);
+    a.position = lerp(a.position, stickCenter + stickDir * _Length * 0.5, saturate(a.volume*b.volume*1000));
+}
+
+[numthreads(64,1,1)]
+void PointsMain (uint3 id : SV_DispatchThreadID) {
+    if (id.x == _SquirtIndex) {
+        _Points[id.x].prevPosition = _SquirtPosition-_SquirtVelocity;
+        _Points[id.x].position = _SquirtPosition;
+        _Points[id.x].volume = _SquirtVolume;
+        int lastID = (id.x+1)%_NumParticles;
+        _Points[lastID].volume = 0;
+    }
+    ComputePoint(_Points[id.x]);
+}
+
+[numthreads(64,1,1)]
+void SticksMain (uint3 id : SV_DispatchThreadID) {
+    ComputeStick(_Points[id.x], _Points[(id.x+1)%(_NumParticles)]);
+    ComputeStick(_Points[id.x], _Points[(id.x-1+_NumParticles)%(_NumParticles)]);
+    _Points[id.x].prevPosition = _Points[id.x].savedPosition;
+}
