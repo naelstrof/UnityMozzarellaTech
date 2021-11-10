@@ -17,18 +17,23 @@ struct Point {
     float volume;
 };
 
+uint _NumSquirts;
+struct Squirt {
+    float3 position;
+    float3 velocity;
+    float volume;
+    uint index;
+};
+
 float3 _Gravity;
 
-float3 _SquirtPosition;
-float3 _SquirtVelocity;
-float _SquirtVolume;
-uint _SquirtIndex;
 
 float _DeltaTime;
 float _Length;
 uint _NumParticles;
 
 RWStructuredBuffer<Point> _Points;
+StructuredBuffer<Squirt> _Squirts;
 
 float hash13(float3 p3) {
 	p3 = frac(p3 * .1031);
@@ -49,55 +54,91 @@ void ComputePoint(inout Point p) {
 }
 
 
-void DepthCollide(inout Point p) {
-    // World position -> [0,1) camera space
-    uint width, height;
-    _DepthTexture.GetDimensions(width, height);
-
+float GetScreenDepthAtPosition(float3 worldPosition, float defaultDistance) {
     // Need the full view projection matrix to figure out where the point lays in texture space.
-    float4 uv = mul(_ViewProjection, float4(p.position,1));
+    // World position -> [0,1) camera space
+    float4 uv = mul(_ViewProjection, float4(worldPosition,1));
     uv = uv/uv.w;
     float2 realuv = float2(uv.xy)*0.5+0.5;
     if (realuv.x < 0 || realuv.y < 0 || realuv.y > 1 || realuv.x > 1) {
-        return;
+        return defaultDistance;
     }
 
     // This is how I correct for depth buffer ray distortion, there's probably a more efficent way
     float4 viewVector = mul(_CameraInverseProjection, float4(uv.xy, 0, -1));
     float3 rayLength = mul(_CameraToWorld, float4(viewVector.xyz,0)).xyz;
     // Of course, textures in compute shaders don't take normalized uvs, so we need the screen size...
-    float nonlin_depth = _DepthTexture[realuv*uint2(width,height)].r;
+    uint width, height;
+    _DepthTexture.GetDimensions(width, height);
+    uint2 irealuv = realuv*uint2(width,height);
+    float nonlin_depth = _DepthTexture[irealuv].r;
 
     // the start and end clipping plane have fucked up depth data, so we try to ignore it.
     if (nonlin_depth == 0 || nonlin_depth == 1) {
-        return;
+        return defaultDistance;
     }
+    float centerDepth = LinearEyeDepth(nonlin_depth) * length(rayLength);
+    return centerDepth;
+}
 
-    float screenDist = LinearEyeDepth(nonlin_depth) * length(rayLength);
-
+void DepthCollide(inout Point p) {
+    float screenDist = GetScreenDepthAtPosition(p.position,10000000);
     float3 camWS = mul(_CameraToWorld, float4(0,0,0,1)).xyz;
     float3 dir = p.position-camWS;
-    if (screenDist < length(dir)) {
-        p.position = (normalize(dir)*screenDist)+camWS;
-        p.prevPosition = p.position;
-        p.savedPosition = p.position;
+    float pDistance = length(dir);
+    float depthThickness = 0.5f;
+    if (pDistance-screenDist < depthThickness && pDistance > screenDist) {
+        float3 camForward = mul(_CameraToWorld, float4(0,0,1,0)).xyz;
+        float3 camUp = mul(_CameraToWorld, float4(0,1,0,0)).xyz;
+        // Guess if we're on a floor or not.
+        float slightlyUpDist = GetScreenDepthAtPosition(p.position+camUp*0.1, screenDist);
+        float3 ndir = normalize(dir);
+        float screenFloorness = saturate(abs(slightlyUpDist-screenDist)*10);
+        float worldFloorness = lerp(screenFloorness, 1-screenFloorness, saturate(dot(camForward,normalize(_Gravity))));
+        float3 newPos = (ndir*screenDist)+camWS; 
+
+        // Compensate for crawling towards the camera by solving for one of the triangle edges
+        float3 edge = (p.position-newPos);
+        edge.y = 0;
+        // modify it by how much we are on a "floor"
+        newPos = lerp(newPos, newPos+edge, worldFloorness);
+
+        // Bounce a little
+        p.prevPosition = lerp(p.prevPosition, newPos, 0.9f);
+        p.savedPosition = p.prevPosition;
+        p.position = newPos;
     }
 }
 
 void ComputeStick(inout Point a, Point b) {
+    float adjustAmount = saturate(a.volume*b.volume);
+    float diff = a.position-b.position;
+    // Adjust volume by distance
+    float dist = length(diff);
+    float newVolume = a.volume+(_Length-dist)*0.05;
+    a.volume = lerp(a.volume, saturate(newVolume), saturate(sign(b.volume)));
+
+    // Then actually do the stick constraint
     float3 stickCenter = (a.position + b.position)*0.5;
-    float3 stickDir = normalize(a.position - b.position);
-    a.position = lerp(a.position, stickCenter + stickDir * _Length * 0.5, saturate(a.volume*b.volume*1000));
+    if (dist > 0) {
+        float3 stickDir = normalize(diff);
+        a.position = lerp(a.position, stickCenter + stickDir * _Length * 0.5, adjustAmount);
+    }
 }
 
 [numthreads(64,1,1)]
 void PointsMain (uint3 id : SV_DispatchThreadID) {
-    if (id.x == _SquirtIndex) {
-        _Points[id.x].prevPosition = _SquirtPosition-_SquirtVelocity;
-        _Points[id.x].position = _SquirtPosition;
-        _Points[id.x].volume = _SquirtVolume;
-        int lastID = (id.x+1)%_NumParticles;
-        _Points[lastID].volume = 0;
+    for(uint i=0;i<_NumSquirts;i++) {
+        if (id.x == _Squirts[i].index) {
+            _Points[id.x].prevPosition = _Squirts[i].position-_Squirts[i].velocity;
+            _Points[id.x].position = _Squirts[i].position;
+            _Points[id.x].volume = _Squirts[i].volume;
+            int lastID = (id.x+1)%_NumParticles;
+            _Points[lastID].volume = 0;
+        }
+    }
+    if (_Points[id.x].volume == 0) {
+        return;
     }
     StartPointCalc(_Points[id.x]);
     DepthCollide(_Points[id.x]);
