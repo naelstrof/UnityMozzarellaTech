@@ -4,17 +4,15 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Mozzarella : MonoBehaviour {
-    [Range(64, 2048)]
+    [Range(64, 4096)]
     public int numParticles = 512;
+    public List<Squirt> squirts;
     private int numParticlesID, pointsID, gravityID, lengthID, depthTextureID, worldToCameraID, cameraInverseProjectionID, cameraVPID, cameraToWorldID, nearClipValueID;
     private int cameraDepthID;
     private int farClipValueID;
 
-    private int squirtIndex;
-    private int squirtIndexID;
-    private int squirtPositionID;
-    private int squirtVelocityID;
-    private int squirtVolumeID;
+    private int numSquirtsID;
+    private int squirtsID;
     private int deltaTimeID;
     public Mesh mesh;
     private Material instantiatedMeshMaterial;
@@ -22,12 +20,50 @@ public class Mozzarella : MonoBehaviour {
     public ComputeShader verletProcessor;
     private ComputeBuffer points;
     private ComputeBuffer positions;
+    private ComputeBuffer squirtsBuffer;
 
     private struct Point {
         public Vector3 position;
         public Vector3 prevPosition;
         public Vector3 savedPosition;
         public float volume;
+    }
+    [System.Serializable]
+    public struct Squirt {
+        public Squirt(Squirt other) : this() {
+            position = other.position;
+            velocity = other.velocity;
+            volume = other.volume;
+            index = other.index;
+        }
+        public Squirt(Squirt other, uint newIndex) : this() {
+            position = other.position;
+            velocity = other.velocity;
+            volume = other.volume;
+            index = newIndex;
+        }
+        public Squirt(Squirt other, Vector3 newPosition, Vector3 newVelocity) : this() {
+            position = newPosition;
+            velocity = newVelocity;
+            volume = other.volume;
+            index = other.index;
+        }
+        public Squirt(Squirt other, float newVolume) {
+            position = other.position;
+            velocity = other.velocity;
+            volume = newVolume;
+            index = other.index;
+        }
+        public Squirt(Vector3 pos, Vector3 vel, float volume, uint index) {
+            position = pos;
+            velocity = vel;
+            this.volume = volume;
+            this.index = index;
+        }
+        public Vector3 position;
+        public Vector3 velocity;
+        public float volume;
+        public uint index;
     }
     void Awake() {
         pointsID = Shader.PropertyToID("_Points");
@@ -43,15 +79,14 @@ public class Mozzarella : MonoBehaviour {
         farClipValueID = Shader.PropertyToID("_FarClipValue");
         cameraVPID = Shader.PropertyToID("_ViewProjection");
 
-        squirtVolumeID = Shader.PropertyToID("_SquirtVolume");
-        squirtVelocityID = Shader.PropertyToID("_SquirtVelocity");
-        squirtPositionID = Shader.PropertyToID("_SquirtPosition");
-        squirtIndexID = Shader.PropertyToID("_SquirtIndex");
+        squirtsID = Shader.PropertyToID("_Squirts");
+        numSquirtsID = Shader.PropertyToID("_NumSquirts");
         cameraDepthID = Shader.PropertyToID("_CameraDepthTexture");
         instantiatedMeshMaterial = Material.Instantiate(instancedMeshMaterial);
     }
     void Start() {
         points = new ComputeBuffer(numParticles, sizeof(float)*10);
+        squirtsBuffer = new ComputeBuffer(squirts.Count, sizeof(float)*7+sizeof(uint)*1);
         List<Point> startingPoints = new List<Point>();
         for(int i=0;i<numParticles;i++) {
             Vector3 rand = UnityEngine.Random.insideUnitSphere;
@@ -62,23 +97,27 @@ public class Mozzarella : MonoBehaviour {
             });
         }
         points.SetData<Point>(startingPoints);
-        verletProcessor.SetVector(gravityID, Physics.gravity);
+        for(int i=0;i<squirts.Count;i++) {
+            squirts[i] = new Squirt(squirts[i], (uint)(i*(numParticles/squirts.Count)));
+        }
+        squirtsBuffer.SetData<Squirt>(squirts);
+        verletProcessor.SetVector(gravityID, Physics.gravity*0.4f);
         verletProcessor.SetFloat(deltaTimeID, Time.fixedDeltaTime);
-        verletProcessor.SetFloat(lengthID, 1f*Time.fixedDeltaTime);
+        verletProcessor.SetFloat(lengthID, 0.5f*Time.fixedDeltaTime);
         instantiatedMeshMaterial.SetBuffer("_Points", points);
     }
     void FixedUpdate() {
         float volume = Mathf.Clamp01(Mathf.Sin(Time.time*5f));
-        Vector3 pos = transform.position+UnityEngine.Random.insideUnitSphere*0.01f;
-        Vector3 vel = (transform.up+Mathf.Sin(Time.time*8f)*transform.right+Mathf.Cos(Time.time*8f)*transform.forward).normalized*0.1f;
-
         verletProcessor.SetBuffer(0, pointsID, points);
         verletProcessor.SetInt(numParticlesID, numParticles);
-        verletProcessor.SetVector(squirtPositionID, pos);
-        verletProcessor.SetFloat(squirtVolumeID, volume);
-        verletProcessor.SetInt(squirtIndexID, squirtIndex);
-        squirtIndex = (++squirtIndex)%numParticles;
-        verletProcessor.SetVector(squirtVelocityID, vel);
+        for(int i=0;i<squirts.Count;i++) {
+            uint index = squirts[i].index;
+            index = (++index)%(uint)numParticles;
+            squirts[i] = new Squirt(squirts[i],index);
+        }
+        verletProcessor.SetInt(numSquirtsID, squirts.Count);
+        squirtsBuffer.SetData<Squirt>(squirts);
+        verletProcessor.SetBuffer(0, squirtsID, squirtsBuffer);
         verletProcessor.SetMatrix(worldToCameraID, Camera.main.worldToCameraMatrix);
         verletProcessor.SetMatrix(cameraToWorldID, Camera.main.cameraToWorldMatrix);
         verletProcessor.SetMatrix(cameraInverseProjectionID, Matrix4x4.Inverse(Camera.main.projectionMatrix));
@@ -94,6 +133,7 @@ public class Mozzarella : MonoBehaviour {
     }
     void OnDestroy() {
         points.Dispose();
+        squirtsBuffer.Dispose();
     }
     void Update() {
         // Draw to screen
