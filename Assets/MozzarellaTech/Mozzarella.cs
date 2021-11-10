@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Mozzarella : MonoBehaviour {
-    [Range(64, 4096)]
+    [Range(64, 16384)]
     public int numParticles = 512;
     public List<Squirt> squirts;
     private int numParticlesID, pointsID, gravityID, lengthID, depthTextureID, worldToCameraID, cameraInverseProjectionID, cameraVPID, cameraToWorldID, nearClipValueID;

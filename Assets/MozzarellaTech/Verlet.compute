@@ -91,17 +91,21 @@ void DepthCollide(inout Point p) {
         float3 camForward = mul(_CameraToWorld, float4(0,0,1,0)).xyz;
         float3 camUp = mul(_CameraToWorld, float4(0,1,0,0)).xyz;
         // Guess if we're on a floor or not.
-        float slightlyUpDist = GetScreenDepthAtPosition(p.position+camUp*0.1, screenDist);
+        float slightlyUpDist = GetScreenDepthAtPosition(p.position+camUp*0.05, screenDist);
         float3 ndir = normalize(dir);
-        float screenFloorness = saturate(abs(slightlyUpDist-screenDist)*10);
+        float floornessDist = abs(slightlyUpDist-screenDist);
+        float screenFloorness = saturate(floornessDist*10);
         float worldFloorness = lerp(screenFloorness, 1-screenFloorness, saturate(dot(camForward,normalize(_Gravity))));
         float3 newPos = (ndir*screenDist)+camWS; 
 
-        // Compensate for crawling towards the camera by solving for one of the triangle edges
-        float3 edge = (p.position-newPos);
-        edge.y = 0;
-        // modify it by how much we are on a "floor"
-        newPos = lerp(newPos, newPos+edge, worldFloorness);
+        // only do the camera crawl adjustment if we have two "valid" points
+        if (floornessDist < 1) {
+            // Compensate for crawling towards the camera by solving for one of the triangle edges
+            float3 edge = (p.position-newPos);
+            edge.y = 0;
+            // modify it by how much we are on a "floor"
+            newPos = lerp(newPos, newPos+edge, worldFloorness);
+        }
 
         // Bounce a little
         p.prevPosition = lerp(p.prevPosition, newPos, 0.9f);
@@ -115,7 +119,8 @@ void ComputeStick(inout Point a, Point b) {
     float diff = a.position-b.position;
     // Adjust volume by distance
     float dist = length(diff);
-    float newVolume = a.volume+(_Length-dist)*0.05;
+    float shrinkGrowSpeed = 0.1;
+    float newVolume = a.volume+(_Length-dist)*shrinkGrowSpeed;
     a.volume = lerp(a.volume, saturate(newVolume), saturate(sign(b.volume)));
 
     // Then actually do the stick constraint
