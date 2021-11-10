@@ -103,7 +103,7 @@ public class Mozzarella : MonoBehaviour {
         squirtsBuffer.SetData<Squirt>(squirts);
         verletProcessor.SetVector(gravityID, Physics.gravity*0.4f);
         verletProcessor.SetFloat(deltaTimeID, Time.fixedDeltaTime);
-        verletProcessor.SetFloat(lengthID, 0.5f*Time.fixedDeltaTime);
+        verletProcessor.SetFloat(lengthID, 0.25f*Time.fixedDeltaTime);
         instantiatedMeshMaterial.SetBuffer("_Points", points);
     }
     void FixedUpdate() {
