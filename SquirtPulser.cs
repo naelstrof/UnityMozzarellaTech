@@ -10,9 +10,15 @@ public class SquirtPulser : MonoBehaviour {
     }
     void Update() {
         for(int i=0;i<mozzarella.squirts.Count;i++) {
+            float volume = Mathf.Clamp01(Mathf.Abs(Mathf.Sin(Time.time*2f+i*5f))-0.2f);
+            if (volume < 0.3f) {
+                volume = 0f;
+            } else {
+                volume = Mathf.Lerp(volume, 1f, 0.5f);
+            }
             mozzarella.squirts[i] = new Mozzarella.Squirt(transform.position,
             Vector3.up*0.025f+transform.up*0.1f+UnityEngine.Random.insideUnitSphere*0.1f,
-            Mathf.Clamp01(Mathf.Abs(Mathf.Sin(Time.time*2f))-0.2f),
+            volume,
             mozzarella.squirts[i].index);
         }
     }
