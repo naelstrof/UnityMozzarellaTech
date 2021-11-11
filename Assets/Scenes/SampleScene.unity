@@ -378,7 +378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &632577039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +430,7 @@ MonoBehaviour:
     volume: 1
     index: 0
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
-  instancedMeshMaterial: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  instancedMeshMaterial: {fileID: 2100000, guid: 05fd72dc514c72044a6a97a23a9b5418, type: 2}
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!4 &632577040
 Transform:
@@ -605,7 +605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &856370405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,7 +669,7 @@ MonoBehaviour:
     volume: 1
     index: 0
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
-  instancedMeshMaterial: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  instancedMeshMaterial: {fileID: 2100000, guid: 05fd72dc514c72044a6a97a23a9b5418, type: 2}
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!4 &856370407
 Transform:
@@ -1317,7 +1317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1858219141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,7 +1381,7 @@ MonoBehaviour:
     volume: 1
     index: 0
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
-  instancedMeshMaterial: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  instancedMeshMaterial: {fileID: 2100000, guid: 05fd72dc514c72044a6a97a23a9b5418, type: 2}
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!4 &1858219143
 Transform:
@@ -1654,7 +1654,7 @@ MonoBehaviour:
     volume: 1
     index: 0
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
-  instancedMeshMaterial: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  instancedMeshMaterial: {fileID: 2100000, guid: 05fd72dc514c72044a6a97a23a9b5418, type: 2}
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!4 &1991865559
 Transform:
