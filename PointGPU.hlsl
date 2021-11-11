@@ -17,7 +17,7 @@ void ConfigureProcedural () {
 		// Set the XYZ translation on the matrix
 		unity_ObjectToWorld._m03_m13_m23_m33 = float4(p.position.xyz, 1.0);
 		// Set the XYZ scale on the matrix
-		unity_ObjectToWorld._m00_m11_m22 = p.volume*0.08f;
+		unity_ObjectToWorld._m00_m11_m22 = p.volume*0.55f;
 	#endif
 }
 

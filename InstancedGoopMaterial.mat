@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: InstancedMaterial
+  m_Name: InstancedGoopMaterial
   m_Shader: {fileID: 4800000, guid: 25016f74530576e4981279e3c365a24b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -112,7 +112,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlassColor: {r: 0.34049463, g: 1, b: 0, a: 0}
+    - _GlassColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7543929287565550865
