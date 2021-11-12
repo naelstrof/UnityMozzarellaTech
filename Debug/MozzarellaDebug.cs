@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+// Meant to draw some debug information on the screen as a texture. Not really useful for anything else
 public class MozzarellaDebug : MonoBehaviour {
     public RenderTexture destination;
     public ComputeShader testShader;
