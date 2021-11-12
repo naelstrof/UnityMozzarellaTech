@@ -6,26 +6,38 @@ using UnityEngine.Rendering;
 public class Mozzarella : MonoBehaviour {
     [Range(64, 16384)]
     public int numParticles = 512;
+    [Range(4, 16)]
+    public int hitEventCount = 8;
     public List<Squirt> squirts;
     private int numParticlesID, pointsID, gravityID, lengthID, depthTextureID, worldToCameraID, cameraInverseProjectionID, cameraVPID, cameraToWorldID, nearClipValueID;
     private int cameraDepthID;
+    private int numHitEventsID;
     private int farClipValueID;
 
     private int numSquirtsID;
     private int squirtsID;
+    private int hitEventsID;
     private int deltaTimeID;
     public Mesh mesh;
     private Material instantiatedMeshMaterial;
     public Material instancedMeshMaterial;
     public ComputeShader verletProcessor;
-    private ComputeBuffer points;
-    private ComputeBuffer positions;
+    private ComputeBuffer pointsBuffer;
+    private ComputeBuffer hitEventsBuffer;
+    private ComputeBuffer positionsBuffer;
     private ComputeBuffer squirtsBuffer;
+    private List<HitEvent> hitEvents;
+    public delegate void HitEventAction(HitEvent hitEvent);
+    public event HitEventAction OnDepthBufferHit;
 
     private struct Point {
         public Vector3 position;
         public Vector3 prevPosition;
         public Vector3 savedPosition;
+        public float volume;
+    }
+    public struct HitEvent {
+        public Vector3 position;
         public float volume;
     }
     [System.Serializable]
@@ -66,6 +78,7 @@ public class Mozzarella : MonoBehaviour {
         public uint index;
     }
     void Awake() {
+        hitEvents = new List<HitEvent>();
         pointsID = Shader.PropertyToID("_Points");
         deltaTimeID = Shader.PropertyToID("_DeltaTime");
         gravityID = Shader.PropertyToID("_Gravity");
@@ -78,14 +91,17 @@ public class Mozzarella : MonoBehaviour {
         nearClipValueID = Shader.PropertyToID("_NearClipValue");
         farClipValueID = Shader.PropertyToID("_FarClipValue");
         cameraVPID = Shader.PropertyToID("_ViewProjection");
+        hitEventsID = Shader.PropertyToID("_HitEvents");
 
+        numHitEventsID = Shader.PropertyToID("_NumHitEvents");
         squirtsID = Shader.PropertyToID("_Squirts");
         numSquirtsID = Shader.PropertyToID("_NumSquirts");
         cameraDepthID = Shader.PropertyToID("_CameraDepthTexture");
         instantiatedMeshMaterial = Material.Instantiate(instancedMeshMaterial);
     }
     void Start() {
-        points = new ComputeBuffer(numParticles, sizeof(float)*10);
+        pointsBuffer = new ComputeBuffer(numParticles, sizeof(float)*10);
+        hitEventsBuffer = new ComputeBuffer(hitEventCount, sizeof(float)*4);
         squirtsBuffer = new ComputeBuffer(squirts.Count, sizeof(float)*7+sizeof(uint)*1);
         List<Point> startingPoints = new List<Point>();
         for(int i=0;i<numParticles;i++) {
@@ -96,19 +112,27 @@ public class Mozzarella : MonoBehaviour {
                 volume = 0f,
             });
         }
-        points.SetData<Point>(startingPoints);
+        pointsBuffer.SetData<Point>(startingPoints);
         for(int i=0;i<squirts.Count;i++) {
             squirts[i] = new Squirt(squirts[i], (uint)(i*(numParticles/squirts.Count)));
         }
         squirtsBuffer.SetData<Squirt>(squirts);
+        for(int i=0;i<hitEventCount;i++) {
+            hitEvents.Add(new HitEvent() {position = Vector3.zero, volume = 0f});
+        }
+        hitEventsBuffer.SetData<HitEvent>(hitEvents);
+        verletProcessor.SetInt(numHitEventsID, hitEvents.Count);
         verletProcessor.SetVector(gravityID, Physics.gravity*0.4f);
         verletProcessor.SetFloat(deltaTimeID, Time.fixedDeltaTime);
         verletProcessor.SetFloat(lengthID, 0.25f*Time.fixedDeltaTime);
-        instantiatedMeshMaterial.SetBuffer("_Points", points);
+        instantiatedMeshMaterial.SetBuffer("_Points", pointsBuffer);
     }
     void FixedUpdate() {
+        if (Shader.GetGlobalTexture(cameraDepthID) == null) {
+            return;
+        }
         float volume = Mathf.Clamp01(Mathf.Sin(Time.time*5f));
-        verletProcessor.SetBuffer(0, pointsID, points);
+        verletProcessor.SetBuffer(0, pointsID, pointsBuffer);
         verletProcessor.SetInt(numParticlesID, numParticles);
         for(int i=0;i<squirts.Count;i++) {
             uint index = squirts[i].index;
@@ -117,6 +141,7 @@ public class Mozzarella : MonoBehaviour {
         }
         verletProcessor.SetInt(numSquirtsID, squirts.Count);
         squirtsBuffer.SetData<Squirt>(squirts);
+        verletProcessor.SetBuffer(0, hitEventsID, hitEventsBuffer);
         verletProcessor.SetBuffer(0, squirtsID, squirtsBuffer);
         verletProcessor.SetMatrix(worldToCameraID, Camera.main.worldToCameraMatrix);
         verletProcessor.SetMatrix(cameraToWorldID, Camera.main.cameraToWorldMatrix);
@@ -128,12 +153,26 @@ public class Mozzarella : MonoBehaviour {
         verletProcessor.SetFloat(farClipValueID, Camera.main.farClipPlane);
         verletProcessor.SetTextureFromGlobal(0, depthTextureID, cameraDepthID);
 
-        // Point update
+        // Points update
         verletProcessor.Dispatch(0, numParticles, 1, 1);
+        AsyncGPUReadback.Request(hitEventsBuffer, sizeof(float)*4*hitEventCount, 0, GetHitEvents);
+    }
+    void GetHitEvents(AsyncGPUReadbackRequest request) {
+        if (!Application.isPlaying) {
+            return;
+        }
+        foreach(var hitEvent in request.GetData<HitEvent>()) {
+            if (hitEvent.volume != 0f) {
+                OnDepthBufferHit?.Invoke(hitEvent);
+            }
+        }
+        // Reset them!
+        hitEventsBuffer.SetData<HitEvent>(hitEvents);
     }
     void OnDestroy() {
-        points.Dispose();
+        pointsBuffer.Dispose();
         squirtsBuffer.Dispose();
+        hitEventsBuffer.Dispose();
     }
     void Update() {
         // Draw to screen

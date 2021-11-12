@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Mozzarella))]
-public class SquirtPulser : MonoBehaviour {
+public class MozzarellaSquirtPulser : MonoBehaviour {
     Mozzarella mozzarella;
     void Start() {
         mozzarella = GetComponent<Mozzarella>();

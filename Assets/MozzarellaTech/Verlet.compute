@@ -25,14 +25,20 @@ struct Squirt {
     uint index;
 };
 
-float3 _Gravity;
+uint _NumHitEvents;
+struct HitEvent {
+    float3 position;
+    float volume;
+};
 
+float3 _Gravity;
 
 float _DeltaTime;
 float _Length;
 uint _NumParticles;
 
 RWStructuredBuffer<Point> _Points;
+RWStructuredBuffer<HitEvent> _HitEvents;
 StructuredBuffer<Squirt> _Squirts;
 
 float hash13(float3 p3) {
@@ -81,7 +87,7 @@ float GetScreenDepthAtPosition(float3 worldPosition, float defaultDistance) {
     return centerDepth;
 }
 
-void DepthCollide(inout Point p) {
+void DepthCollide(inout Point p, uint3 id) {
     float screenDist = GetScreenDepthAtPosition(p.position,10000000);
     float3 camWS = mul(_CameraToWorld, float4(0,0,0,1)).xyz;
     float3 dir = p.position-camWS;
@@ -111,6 +117,11 @@ void DepthCollide(inout Point p) {
         p.prevPosition = lerp(p.prevPosition, newPos, 0.9f);
         p.savedPosition = p.prevPosition;
         p.position = newPos;
+
+        // Register a hit event
+        uint hitID = hash13(newPos)*(_NumHitEvents-1);
+        _HitEvents[hitID].position = newPos;
+        _HitEvents[hitID].volume = 1;
     }
 }
 
@@ -146,7 +157,7 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
         return;
     }
     StartPointCalc(_Points[id.x]);
-    DepthCollide(_Points[id.x]);
+    DepthCollide(_Points[id.x],id);
     ComputePoint(_Points[id.x]);
     ComputeStick(_Points[id.x], _Points[(id.x+1)%(_NumParticles)]);
     ComputeStick(_Points[id.x], _Points[(id.x-1+_NumParticles)%(_NumParticles)]);
