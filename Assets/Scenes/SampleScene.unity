@@ -123,6 +123,104 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &87918193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 87918196}
+  - component: {fileID: 87918195}
+  - component: {fileID: 87918194}
+  m_Layer: 0
+  m_Name: Mozzarella (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &87918194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87918193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &87918195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87918193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &87918196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87918193}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 2.3, y: 5.54, z: 0.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &170171480
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +254,104 @@ Transform:
   m_Father: {fileID: 665423900}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &196330284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 196330287}
+  - component: {fileID: 196330286}
+  - component: {fileID: 196330285}
+  m_Layer: 0
+  m_Name: Mozzarella (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &196330285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196330284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &196330286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196330284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &196330287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196330284}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 1.25, y: 5.54, z: -0.78000003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &202063126
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +462,104 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4527368504392492, guid: a87f0180d46fd334b9025d0314a0dc70, type: 3}
   m_PrefabInstance: {fileID: 296138508}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &430070077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 430070080}
+  - component: {fileID: 430070079}
+  - component: {fileID: 430070078}
+  m_Layer: 0
+  m_Name: Mozzarella (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &430070078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430070077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &430070079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430070077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &430070080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430070077}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 0.78, y: 6.35, z: -1.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &632577038
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,14 +571,13 @@ GameObject:
   - component: {fileID: 632577040}
   - component: {fileID: 632577039}
   - component: {fileID: 632577041}
-  - component: {fileID: 632577042}
   m_Layer: 0
   m_Name: Mozzarella
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &632577039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numParticles: 2048
+  numParticles: 16384
   hitEventCount: 4
   squirts:
   - position: {x: 0, y: 0.4, z: 0}
@@ -357,22 +650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &632577042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632577038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb2b9eea3aee7946b7c577cc0ee1107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  projector: {fileID: 2100000, guid: 169beda2b444ba64f88614bea679312d, type: 2}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +732,202 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &672141380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 672141383}
+  - component: {fileID: 672141382}
+  - component: {fileID: 672141381}
+  m_Layer: 0
+  m_Name: Mozzarella (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &672141381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672141380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &672141382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672141380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &672141383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672141380}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 0.22, y: 5.54, z: -0.81}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+--- !u!1 &809867010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809867013}
+  - component: {fileID: 809867012}
+  - component: {fileID: 809867011}
+  m_Layer: 0
+  m_Name: Mozzarella (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &809867011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809867010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &809867012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809867010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &809867013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809867010}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 1.81, y: 7.67, z: 0.10999997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &856370404
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +939,6 @@ GameObject:
   - component: {fileID: 856370407}
   - component: {fileID: 856370406}
   - component: {fileID: 856370405}
-  - component: {fileID: 856370408}
   m_Layer: 0
   m_Name: Mozzarella (2)
   m_TagString: Untagged
@@ -554,22 +1026,104 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
---- !u!114 &856370408
+--- !u!1 &928054773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 928054776}
+  - component: {fileID: 928054775}
+  - component: {fileID: 928054774}
+  m_Layer: 0
+  m_Name: Mozzarella (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &928054774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 856370404}
+  m_GameObject: {fileID: 928054773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb2b9eea3aee7946b7c577cc0ee1107, type: 3}
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  projector: {fileID: 2100000, guid: 169beda2b444ba64f88614bea679312d, type: 2}
+--- !u!114 &928054775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928054773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &928054776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928054773}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 0.64, y: 5.54, z: 2.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &1145444333
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,11 +1283,305 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1225824253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1225824256}
+  - component: {fileID: 1225824255}
+  - component: {fileID: 1225824254}
+  m_Layer: 0
+  m_Name: Mozzarella (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1225824254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225824253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1225824255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225824253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &1225824256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225824253}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 3.1299999, y: 3.04, z: 0.73999995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!4 &1278355951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4354465822509128, guid: 85dfab9623c67784fa7894de63cd1604, type: 3}
   m_PrefabInstance: {fileID: 1556901916}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1386911433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386911436}
+  - component: {fileID: 1386911435}
+  - component: {fileID: 1386911434}
+  m_Layer: 0
+  m_Name: Mozzarella (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1386911434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386911433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1386911435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386911433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &1386911436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386911433}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 3.33, y: 5.54, z: 1.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+--- !u!1 &1448519649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1448519652}
+  - component: {fileID: 1448519651}
+  - component: {fileID: 1448519650}
+  m_Layer: 0
+  m_Name: Mozzarella (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1448519650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448519649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1448519651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448519649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &1448519652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448519649}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 0.37, y: 5.54, z: 0.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &1458322688
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +1779,202 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85dfab9623c67784fa7894de63cd1604, type: 3}
+--- !u!1 &1571928469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571928472}
+  - component: {fileID: 1571928471}
+  - component: {fileID: 1571928470}
+  m_Layer: 0
+  m_Name: Mozzarella (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1571928470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571928469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1571928471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571928469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &1571928472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571928469}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 1.81, y: 6.35, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+--- !u!1 &1623465788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1623465791}
+  - component: {fileID: 1623465790}
+  - component: {fileID: 1623465789}
+  m_Layer: 0
+  m_Name: Mozzarella (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1623465789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623465788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1623465790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623465788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &1623465791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623465788}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 1.81, y: 3.04, z: 0.91999996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &1678076025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,6 +2179,104 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1692995573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1692995576}
+  - component: {fileID: 1692995575}
+  - component: {fileID: 1692995574}
+  m_Layer: 0
+  m_Name: Mozzarella (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1692995574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692995573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1692995575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692995573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &1692995576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692995573}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 0.78, y: 7.67, z: 0.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &1858219140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +2288,6 @@ GameObject:
   - component: {fileID: 1858219143}
   - component: {fileID: 1858219142}
   - component: {fileID: 1858219141}
-  - component: {fileID: 1858219144}
   m_Layer: 0
   m_Name: Mozzarella (3)
   m_TagString: Untagged
@@ -1234,22 +2375,104 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
---- !u!114 &1858219144
+--- !u!1 &1863293262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1863293265}
+  - component: {fileID: 1863293264}
+  - component: {fileID: 1863293263}
+  m_Layer: 0
+  m_Name: Mozzarella (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1863293263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858219140}
+  m_GameObject: {fileID: 1863293262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb2b9eea3aee7946b7c577cc0ee1107, type: 3}
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  projector: {fileID: 2100000, guid: 169beda2b444ba64f88614bea679312d, type: 2}
+--- !u!114 &1863293264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863293262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &1863293265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863293262}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 1.4, y: 5.54, z: 0.59999996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &1904166338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,6 +2649,104 @@ MonoBehaviour:
   destination: {fileID: 0}
   testShader: {fileID: 7200000, guid: cecaca4ce387220458f926488720134a, type: 3}
   targetMaterial: {fileID: 2100000, guid: d6b5d494267b1424a9c3d8dc3d9d14dc, type: 2}
+--- !u!1 &1917993889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1917993892}
+  - component: {fileID: 1917993891}
+  - component: {fileID: 1917993890}
+  m_Layer: 0
+  m_Name: Mozzarella (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1917993890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917993889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1917993891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917993889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &1917993892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917993889}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 3.3, y: 3.04, z: -0.48000002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1 &1991865556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,7 +2758,6 @@ GameObject:
   - component: {fileID: 1991865559}
   - component: {fileID: 1991865558}
   - component: {fileID: 1991865557}
-  - component: {fileID: 1991865560}
   m_Layer: 0
   m_Name: Mozzarella (1)
   m_TagString: Untagged
@@ -1525,22 +2845,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
---- !u!114 &1991865560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991865556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb2b9eea3aee7946b7c577cc0ee1107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  projector: {fileID: 2100000, guid: 169beda2b444ba64f88614bea679312d, type: 2}
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,3 +2938,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 130, z: 90}
+--- !u!1 &2145467248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2145467251}
+  - component: {fileID: 2145467250}
+  - component: {fileID: 2145467249}
+  m_Layer: 0
+  m_Name: Mozzarella (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2145467249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145467248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2145467250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145467248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numParticles: 4096
+  hitEventCount: 4
+  squirts:
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: 0}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  - position: {x: 0, y: 0.4, z: 0}
+    velocity: {x: 0.1, y: 0.1, z: -0.1}
+    volume: 1
+    index: 0
+  mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
+  verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
+--- !u!4 &2145467251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145467248}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.0000008195637}
+  m_LocalPosition: {x: 1.67, y: 5.54, z: 2.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}

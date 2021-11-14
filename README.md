@@ -1,6 +1,6 @@
 # MozzarellaTech
 
-![mozzarella mess](2jbZIjuo13.gif)
+![mozzarella mess](cpGfBDWnlL.gif)
 
 A gpu-based verlet solver that solves thousands of particle chains colliding with the depth buffer.
 
@@ -43,6 +43,9 @@ public struct HitEvent {
 With an event/observer pattern, you can subscribe to particle collision events, there's a limited amount of collisions that can happen per frame though.
 
 Collisions are stored via a hash table, hash-collisions simply overwrite. It's pretty good at eventually calling an event for every particle on the screen.
+
+You can use the collisions to do things like draw decals like so:
+![decals!](2jbZIjuo13.gif)
 
 ## Performance
 Because there's very little CPU and GPU communication, this is almost as fast as your GPU can churn!
