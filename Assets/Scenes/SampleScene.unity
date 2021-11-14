@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numParticles: 2048
-  hitEventCount: 8
+  hitEventCount: 4
   squirts:
   - position: {x: 0, y: 0.4, z: 0}
     velocity: {x: 0, y: 0.1, z: 0.1}
@@ -328,16 +328,8 @@ MonoBehaviour:
     velocity: {x: 0.1, y: 0.1, z: -0.1}
     volume: 1
     index: 0
-  - position: {x: 0, y: 0.4, z: 0}
-    velocity: {x: 0.1, y: 0.1, z: -0.1}
-    volume: 1
-    index: 0
-  - position: {x: 0, y: 0.4, z: 0}
-    velocity: {x: 0.1, y: 0.1, z: -0.1}
-    volume: 1
-    index: 0
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
-  instancedMeshMaterial: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!4 &632577040
 Transform:
@@ -481,7 +473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &856370405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numParticles: 4096
-  hitEventCount: 32
+  hitEventCount: 4
   squirts:
   - position: {x: 0, y: 0.4, z: 0}
     velocity: {x: 0, y: 0.1, z: 0.1}
@@ -546,7 +538,7 @@ MonoBehaviour:
     volume: 1
     index: 0
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
-  instancedMeshMaterial: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!4 &856370407
 Transform:
@@ -1102,15 +1094,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: -0.022957042, y: 0.97606146, z: -0.17338957, w: -0.12927918}
-  m_LocalPosition: {x: 2.32, y: 1.203, z: 2.378}
+  m_LocalRotation: {x: -0, y: 0.70710695, z: -0, w: 0.7071066}
+  m_LocalPosition: {x: -1.69, y: 1.99, z: 0.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1908103820}
   - {fileID: 632577040}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20.146, y: 195.09, z: 0.001}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1687258586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,7 +1153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1858219141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1187,7 +1179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numParticles: 4096
-  hitEventCount: 32
+  hitEventCount: 4
   squirts:
   - position: {x: 0, y: 0.4, z: 0}
     velocity: {x: 0, y: 0.1, z: 0.1}
@@ -1226,7 +1218,7 @@ MonoBehaviour:
     volume: 1
     index: 0
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
-  instancedMeshMaterial: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!4 &1858219143
 Transform:
@@ -1452,7 +1444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1991865557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,7 +1470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numParticles: 4096
-  hitEventCount: 32
+  hitEventCount: 4
   squirts:
   - position: {x: 0, y: 0.4, z: 0}
     velocity: {x: 0, y: 0.1, z: 0.1}
@@ -1517,7 +1509,7 @@ MonoBehaviour:
     volume: 1
     index: 0
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
-  instancedMeshMaterial: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  instancedMeshMaterial: {fileID: 2100000, guid: 2a7e9980a892148408535eb4ea42ac67, type: 2}
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!4 &1991865559
 Transform:
