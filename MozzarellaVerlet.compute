@@ -126,20 +126,21 @@ void DepthCollide(inout Point p, uint3 id) {
 }
 
 void ComputeStick(inout Point a, Point b) {
-    float adjustAmount = saturate(a.volume*b.volume);
     float diff = a.position-b.position;
-    // Adjust volume by distance
     float dist = length(diff);
+
+    // stick constraint
+    if (dist > 0) {
+        float3 stickCenter = (a.position + b.position)*0.5;
+        float3 stickDir = normalize(diff);
+        float inverseAdjust = 1.0-saturate(a.volume*b.volume);
+        a.position = lerp(stickCenter + stickDir * _Length * 0.5, a.position, (inverseAdjust*inverseAdjust));
+    }
+
+    // Adjust volume by distance
     float shrinkGrowSpeed = 0.1;
     float newVolume = a.volume+(_Length-dist)*shrinkGrowSpeed;
     a.volume = lerp(a.volume, saturate(newVolume), saturate(sign(b.volume)));
-
-    // Then actually do the stick constraint
-    float3 stickCenter = (a.position + b.position)*0.5;
-    if (dist > 0) {
-        float3 stickDir = normalize(diff);
-        a.position = lerp(a.position, stickCenter + stickDir * _Length * 0.5, adjustAmount);
-    }
 }
 
 [numthreads(64,1,1)]

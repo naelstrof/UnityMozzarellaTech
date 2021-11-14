@@ -14,7 +14,7 @@ public class MozzarellaSquirtPulser : MonoBehaviour {
             if (volume < 0.3f) {
                 volume = 0f;
             } else {
-                volume = Mathf.Lerp(volume, 1f, 0.5f);
+                volume = Mathf.Lerp(volume, 1f, 0.25f);
             }
             mozzarella.squirts[i] = new Mozzarella.Squirt(transform.position,
             Vector3.up*0.025f+transform.up*0.1f+UnityEngine.Random.insideUnitSphere*0.1f,

@@ -18,7 +18,7 @@ public class MozzarellaDecals : MonoBehaviour {
         mozzarella.OnDepthBufferHit += OnDepthBufferHit;
     }
     void OnDepthBufferHit(Mozzarella.HitEvent hitEvent) {
-        float size = hitEvent.volume*0.5f;
+        float size = hitEvent.volume*0.25f;
         int hits = Physics.OverlapSphereNonAlloc(hitEvent.position, hitEvent.volume*0.25f, colliders, hitMask, QueryTriggerInteraction.UseGlobal );
         for (int i=0;i<hits;i++) {
             Collider c = colliders[i];
