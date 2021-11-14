@@ -12,6 +12,7 @@ Simply add `https://github.com/naelstrof/MozzarellaTech.git#upm` as a package us
 ## Usage
 Simply add a Mozzarella monobehavior, and make sure it has at least one Squirt, one of the included materials, an arbitrary mesh, and the included MozzarellaVerlet compute shader added like so: 
 ![monobehavior example](example.png)
+
 To interact with how it spawns streams, simply create other monobehaviors that manipulate the Squirt positions/volumes/velocities.
 
 ## Spawning
@@ -46,9 +47,11 @@ Collisions are stored via a hash table, hash-collisions simply overwrite. It's p
 ## Performance
 Because there's very little CPU and GPU communication, this is almost as fast as your GPU can churn!
 ![2ms performance](performance.png)
+
 More than 16384 particles takes less than 1ms on a Nvidia 1080 ti.
 
 ## Graphics
 The particles are limited to what you can design as a procedural draw call in Unity. I've included three examples.
 ![three sphere examples](9E5VCnxCVR.gif)
+
 None of them are allowed to draw during the opaque pass, since that would mean they'd show up on the depth buffer (causing self-collisions)! Shader Graph is unfortunately not capable of doing that yet, so all of these were designed with Amplify Shader Editor.
