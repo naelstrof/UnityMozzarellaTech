@@ -29,6 +29,11 @@ public class Mozzarella : MonoBehaviour {
     private List<HitEvent> hitEvents;
     public delegate void HitEventAction(HitEvent hitEvent);
     public event HitEventAction OnDepthBufferHit;
+    public float pointSize {
+        set {
+            instantiatedMeshMaterial?.SetFloat("_PointScale", value);
+        }
+    }
 
     private struct Point {
         public Vector3 position;

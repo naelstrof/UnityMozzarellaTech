@@ -138,7 +138,7 @@ void ComputeStick(inout Point a, Point b) {
     }
 
     // Adjust volume by distance
-    float shrinkGrowSpeed = 0.1;
+    float shrinkGrowSpeed = 0.15;
     float newVolume = a.volume+(_Length-dist)*shrinkGrowSpeed;
     a.volume = lerp(a.volume, saturate(newVolume), saturate(sign(b.volume)));
 }
