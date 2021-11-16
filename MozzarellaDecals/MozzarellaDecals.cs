@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Mozzarella))]
 public class MozzarellaDecals : MonoBehaviour {
     [SerializeField]
+    [Range(0.001f,1f)]
+    private float decalSize = 0.1f;
+    [SerializeField]
     private LayerMask hitMask;
     [SerializeField]
     private Material projector;
@@ -18,8 +21,8 @@ public class MozzarellaDecals : MonoBehaviour {
         mozzarella.OnDepthBufferHit += OnDepthBufferHit;
     }
     void OnDepthBufferHit(Mozzarella.HitEvent hitEvent) {
-        float size = hitEvent.volume*0.25f;
-        int hits = Physics.OverlapSphereNonAlloc(hitEvent.position, hitEvent.volume*0.25f, colliders, hitMask, QueryTriggerInteraction.UseGlobal );
+        float size = hitEvent.volume*decalSize;
+        int hits = Physics.OverlapSphereNonAlloc(hitEvent.position, size, colliders, hitMask, QueryTriggerInteraction.UseGlobal );
         for (int i=0;i<hits;i++) {
             Collider c = colliders[i];
             Renderer renderer = c.GetComponent<Renderer>();
