@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Mozzarella))]
+[RequireComponent(typeof(MozzarellaHitEventListener))]
 public class MozzarellaDecals : MonoBehaviour {
     [SerializeField]
     [Range(0.001f,1f)]
@@ -12,15 +12,18 @@ public class MozzarellaDecals : MonoBehaviour {
     [SerializeField]
     private Material projector;
     private Collider[] colliders;
-    private Mozzarella mozzarella;
     void Awake() {
         colliders = new Collider[32];
     }
     void Start() {
-        mozzarella = GetComponent<Mozzarella>();
-        mozzarella.OnDepthBufferHit += OnDepthBufferHit;
+        GetComponent<MozzarellaHitEventListener>().OnDepthBufferHit += OnDepthBufferHit;
     }
-    void OnDepthBufferHit(Mozzarella.HitEvent hitEvent) {
+    void OnDepthBufferHit(List<MozzarellaHitEventListener.HitEvent> hitEvents) {
+        foreach(var hitEvent in hitEvents) {
+            DrawDecal(hitEvent);
+        }
+    }
+    void DrawDecal(MozzarellaHitEventListener.HitEvent hitEvent) {
         float size = hitEvent.volume*decalSize;
         int hits = Physics.OverlapSphereNonAlloc(hitEvent.position, size, colliders, hitMask, QueryTriggerInteraction.UseGlobal );
         for (int i=0;i<hits;i++) {
