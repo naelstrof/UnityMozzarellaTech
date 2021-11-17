@@ -1,5 +1,7 @@
-// Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel PointsMain
+#pragma kernel ClearHitEvents
+#pragma multi_compile_local __ HIT_EVENTS
+
 #include "UnityCG.cginc"
 Texture2D<float4> _DepthTexture;
 float4x4 _WorldToCamera;
@@ -25,11 +27,14 @@ struct Squirt {
     uint index;
 };
 
+#if HIT_EVENTS
 uint _NumHitEvents;
 struct HitEvent {
     float3 position;
     float volume;
 };
+RWStructuredBuffer<HitEvent> _HitEvents;
+#endif
 
 float3 _Gravity;
 
@@ -38,7 +43,6 @@ float _Length;
 uint _NumParticles;
 
 RWStructuredBuffer<Point> _Points;
-RWStructuredBuffer<HitEvent> _HitEvents;
 StructuredBuffer<Squirt> _Squirts;
 
 float hash13(float3 p3) {
@@ -118,10 +122,12 @@ void DepthCollide(inout Point p, uint3 id) {
         p.savedPosition = p.prevPosition;
         p.position = newPos;
 
+        #if HIT_EVENTS
         // Register a hit event
         uint hitID = hash13(newPos)*(_NumHitEvents-1);
         _HitEvents[hitID].position = newPos;
-        _HitEvents[hitID].volume = 1;
+        _HitEvents[hitID].volume = p.volume;
+        #endif
     }
 }
 
@@ -163,4 +169,11 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
     ComputeStick(_Points[id.x], _Points[(id.x+1)%(_NumParticles)]);
     ComputeStick(_Points[id.x], _Points[(id.x-1+_NumParticles)%(_NumParticles)]);
     FinishPointCalc(_Points[id.x]);
+}
+
+[numthreads(64,1,1)]
+void ClearHitEvents (uint3 id : SV_DispatchThreadID) {
+    #if HIT_EVENTS
+    _HitEvents[id.x].volume = 0;
+    #endif
 }
