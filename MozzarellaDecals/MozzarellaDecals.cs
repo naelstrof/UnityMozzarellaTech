@@ -32,7 +32,7 @@ public class MozzarellaDecals : MonoBehaviour {
             if (renderer == null) {
                 continue;
             }
-            PaintDecal.instance.RenderDecal(renderer, projector, hitEvent.position - Vector3.forward*size*0.5f, Quaternion.identity, Vector2.one*size*0.5f, size);
+            SkinnedMeshDecals.PaintDecal.instance.RenderDecal(renderer, projector, hitEvent.position - Vector3.forward*size*0.5f, Quaternion.identity, Vector2.one*size*0.5f, size);
         }
     }
 }

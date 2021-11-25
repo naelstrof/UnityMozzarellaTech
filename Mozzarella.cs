@@ -9,6 +9,8 @@ public class Mozzarella : MonoBehaviour {
     public static string mainKernelName = "PointsMain";
     [Range(64, 16384)]
     public int numParticles = 512;
+    [Range(1,8)]
+    public int squirtVolume = 1;
     [Range(0.01f, 1f)]
     public float pointScale = 0.1f;
     public List<Squirt> squirts;
@@ -66,7 +68,7 @@ public class Mozzarella : MonoBehaviour {
         cameraInverseProjectionID, cameraVPID, cameraToWorldID,
         nearClipValueID, cameraDepthID,
         farClipValueID, numSquirtsID, squirtsID,
-        deltaTimeID, mainKernel;
+        deltaTimeID, squirtIncrementAmountID, mainKernel;
         public MozzarellaShaderBlock(ComputeShader shader) {
             pointsID = Shader.PropertyToID("_Points");
             deltaTimeID = Shader.PropertyToID("_DeltaTime");
@@ -83,6 +85,7 @@ public class Mozzarella : MonoBehaviour {
             squirtsID = Shader.PropertyToID("_Squirts");
             numSquirtsID = Shader.PropertyToID("_NumSquirts");
             cameraDepthID = Shader.PropertyToID("_CameraDepthTexture");
+            squirtIncrementAmountID = Shader.PropertyToID("_SquirtIncrementAmount");
             mainKernel = shader.FindKernel(Mozzarella.mainKernelName);
         }
     }
@@ -111,6 +114,7 @@ public class Mozzarella : MonoBehaviour {
         verletProcessor.SetVector(shaderProperties.gravityID, Physics.gravity*0.4f);
         verletProcessor.SetFloat(shaderProperties.deltaTimeID, Time.fixedDeltaTime);
         verletProcessor.SetFloat(shaderProperties.lengthID, 0.25f*Time.fixedDeltaTime);
+        verletProcessor.SetInt(shaderProperties.squirtIncrementAmountID, squirtVolume);
     }
     void FixedUpdate() {
         if (Shader.GetGlobalTexture(shaderProperties.cameraDepthID) == null) {
@@ -121,7 +125,8 @@ public class Mozzarella : MonoBehaviour {
         verletProcessor.SetInt(shaderProperties.numParticlesID, numParticles);
         for(int i=0;i<squirts.Count;i++) {
             uint index = squirts[i].index;
-            index = (++index)%(uint)numParticles;
+            index += (uint)squirtVolume;
+            index = index%(uint)numParticles;
             squirts[i] = new Squirt(squirts[i],index);
         }
         verletProcessor.SetInt(shaderProperties.numSquirtsID, squirts.Count);

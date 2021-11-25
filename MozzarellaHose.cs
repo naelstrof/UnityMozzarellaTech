@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Mozzarella))]
 public class MozzarellaHose : MonoBehaviour {
     Mozzarella mozzarella;
+    [SerializeField][Range(0f,1f)]
+    private float startVelocity = 0.1f;
+    [SerializeField][Range(0f,1f)]
+    private float velocityVariance;
     void Start() {
         mozzarella = GetComponent<Mozzarella>();
     }
@@ -17,7 +21,7 @@ public class MozzarellaHose : MonoBehaviour {
                 volume = Mathf.Lerp(volume, 1f, 0.25f);
             }
             mozzarella.squirts[i] = new Mozzarella.Squirt(transform.position,
-            Vector3.up*0.025f+transform.up*0.1f+UnityEngine.Random.insideUnitSphere*0.1f,
+            Vector3.up*0.025f+transform.up*startVelocity+UnityEngine.Random.insideUnitSphere*velocityVariance,
             volume,
             mozzarella.squirts[i].index);
         }

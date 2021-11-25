@@ -19,6 +19,7 @@ struct Point {
     float volume;
 };
 
+uint _SquirtIncrementAmount;
 uint _NumSquirts;
 struct Squirt {
     float3 position;
@@ -152,12 +153,14 @@ void ComputeStick(inout Point a, Point b) {
 [numthreads(64,1,1)]
 void PointsMain (uint3 id : SV_DispatchThreadID) {
     for(uint i=0;i<_NumSquirts;i++) {
-        if (id.x == _Squirts[i].index) {
-            _Points[id.x].prevPosition = _Squirts[i].position-_Squirts[i].velocity;
-            _Points[id.x].position = _Squirts[i].position;
-            _Points[id.x].volume = _Squirts[i].volume;
-            int lastID = (id.x+1)%_NumParticles;
-            _Points[lastID].volume = 0;
+        for(uint j=0;j<_SquirtIncrementAmount;j++) {
+            if (id.x == _Squirts[i].index+j) {
+                _Points[id.x].prevPosition = _Squirts[i].position-_Squirts[i].velocity;
+                _Points[id.x].position = _Squirts[i].position;
+                _Points[id.x].volume = _Squirts[i].volume;
+                int lastID = (id.x+1)%_NumParticles;
+                _Points[lastID].volume = 0;
+            }
         }
     }
     if (_Points[id.x].volume == 0) {
