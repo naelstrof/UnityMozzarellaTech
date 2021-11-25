@@ -616,7 +616,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &665423899
 GameObject:
@@ -650,7 +650,7 @@ Transform:
   - {fileID: 170171481}
   - {fileID: 1458322689}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &697272095
 GameObject:
@@ -849,7 +849,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &715363615
 GameObject:
@@ -1300,7 +1300,7 @@ Transform:
   m_LocalScale: {x: 0.090588, y: 0.090588, z: 0.090588}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1278355951 stripped
 Transform:
@@ -1335,13 +1335,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442396543}
-  m_LocalRotation: {x: 0.70710576, y: -0.00000008940697, z: 0.00000023841858, w: 0.7071079}
-  m_LocalPosition: {x: -0, y: -0.193, z: 0.208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.985, y: 0.735, z: 0.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1687258585}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1442396545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1354,33 +1354,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0021ca6d997f2a64f8a4a8f0c9cc6660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squirtDuration: 0.4
+  squirtDuration: 0.3
   volumeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0.3258427
-      inSlope: 1.3483145
-      outSlope: 1.3483145
-      tangentMode: 34
+      time: -0.001112347
+      value: 0.7050225
+      inSlope: 4.9492974
+      outSlope: 4.9492974
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.17395705
     - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      time: 0.12038082
+      value: 0.9529815
+      inSlope: 0.48158538
+      outSlope: 0.48158538
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.13893957
+    - serializedVersion: 3
+      time: 0.767444
+      value: 0.6891571
+      inSlope: -1.2894218
+      outSlope: -1.2894218
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.35859928
     - serializedVersion: 3
       time: 1
       value: 0.3258427
-      inSlope: -1.3483145
-      outSlope: -1.3483145
+      inSlope: -1.5622665
+      outSlope: -1.5622665
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -1393,18 +1402,18 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: -0.0060818493
-      inSlope: 5.1054897
-      outSlope: 5.1054897
-      tangentMode: 34
+      value: 0.4946365
+      inSlope: 4.0222073
+      outSlope: 4.0222073
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.05599748
     - serializedVersion: 3
-      time: 0.19705883
-      value: 1
-      inSlope: 1.9511805
-      outSlope: 1.9511805
+      time: 0.39728466
+      value: 0.9927063
+      inSlope: -0.16851479
+      outSlope: -0.16851479
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -1421,6 +1430,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  velocityMultiplier: 0.05
+  velocityVariance: 0.05
 --- !u!114 &1442396546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1447,8 +1458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numParticles: 1024
-  pointScale: 0.1
+  numParticles: 2048
+  squirtVolume: 3
+  pointScale: 0.05
   squirts:
   - position: {x: 0, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
@@ -1793,7 +1805,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1678076025
 GameObject:
@@ -1838,7 +1850,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1687258581
 GameObject:
@@ -1937,8 +1949,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1908103820}
-  - {fileID: 1442396544}
-  - {fileID: 2085651397}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -2311,13 +2321,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085651396}
-  m_LocalRotation: {x: 0.70710576, y: -0.00000008940697, z: 0.00000023841858, w: 0.7071079}
-  m_LocalPosition: {x: -0, y: -0.193, z: 0.208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.985, y: 0.735, z: 0.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1687258585}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2085651398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2330,6 +2340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startVelocity: 0.08
+  velocityVariance: 0.1
 --- !u!114 &2085651399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2359,7 +2371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b131b90cc54a65b478c03a8e0ee84f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numParticles: 1024
+  numParticles: 4096
+  squirtVolume: 6
   pointScale: 0.1
   squirts:
   - position: {x: 0, y: 0, z: 0}
