@@ -7,11 +7,12 @@ using UnityEngine.Rendering;
 public class MozzarellaDebug : MonoBehaviour {
     public RenderTexture destination;
     public ComputeShader testShader;
-    int worldToCameraID, cameraToWorldID, cameraInverseProjectionID, nearClipValueID, farClipValueID, depthTextureID, resultTextureID, cameraDepthID, cameraVP, cameraProjectionID;
+    int worldToCameraID, cameraToWorldID, cameraInverseProjectionID, nearClipValueID, farClipValueID, depthTextureID, resultTextureID, cameraDepthID, cameraVP, cameraProjectionID, cameraNormalsID, normalsTextureID, cameraInverseViewID;
     public Material targetMaterial;
     void Awake() {
         resultTextureID = Shader.PropertyToID("Result");
         depthTextureID = Shader.PropertyToID("_DepthTexture");
+        normalsTextureID = Shader.PropertyToID("_NormalsTexture");
         worldToCameraID = Shader.PropertyToID("_WorldToCamera");
         cameraToWorldID = Shader.PropertyToID("_CameraToWorld");
         cameraInverseProjectionID = Shader.PropertyToID("_CameraInverseProjection");
@@ -19,10 +20,12 @@ public class MozzarellaDebug : MonoBehaviour {
         nearClipValueID = Shader.PropertyToID("_NearClipValue");
         farClipValueID = Shader.PropertyToID("_FarClipValue");
         cameraDepthID = Shader.PropertyToID("_CameraDepthTexture");
+        cameraNormalsID = Shader.PropertyToID("_CameraNormalsTexture");
         cameraVP = Shader.PropertyToID("_ViewProjection");
+        cameraInverseViewID = Shader.PropertyToID("_InverseViewProjection");
     }
     void Start() {
-        destination = new RenderTexture(512,512,24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
+        destination = new RenderTexture(512,512,24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
         destination.enableRandomWrite = true;
 
         destination.enableRandomWrite = true;
@@ -30,17 +33,20 @@ public class MozzarellaDebug : MonoBehaviour {
         targetMaterial.mainTexture = destination;
     }
     void Update() {
+
         testShader.SetMatrix(worldToCameraID, Camera.main.worldToCameraMatrix);
         testShader.SetMatrix(cameraToWorldID, Camera.main.cameraToWorldMatrix);
         testShader.SetMatrix(cameraInverseProjectionID, Matrix4x4.Inverse(Camera.main.projectionMatrix));
-        Matrix4x4 matrixVP = Camera.main.projectionMatrix  * Camera.main.worldToCameraMatrix; //multipication order matters
+        Matrix4x4 matrixVP = Camera.main.projectionMatrix * Camera.main.worldToCameraMatrix; //multipication order matters
         testShader.SetMatrix(cameraVP, matrixVP);
+        testShader.SetMatrix(cameraInverseViewID, Matrix4x4.Inverse(matrixVP));
         testShader.SetMatrix(cameraProjectionID, Camera.main.projectionMatrix);
         testShader.SetFloat(nearClipValueID, Camera.main.nearClipPlane);
         testShader.SetFloat(farClipValueID, Camera.main.farClipPlane);
         int threadGroupsX = Mathf.CeilToInt ((Camera.main.pixelWidth) / 8.0f);
         int threadGroupsY = Mathf.CeilToInt ((Camera.main.pixelHeight) / 8.0f);
         testShader.SetTextureFromGlobal(0, depthTextureID, cameraDepthID);
+        testShader.SetTextureFromGlobal(0, normalsTextureID, cameraNormalsID);
         testShader.Dispatch(0,threadGroupsX,threadGroupsY,1);
     }
 }

@@ -2,8 +2,11 @@
 #pragma kernel ClearHitEvents
 #pragma multi_compile_local __ HIT_EVENTS
 
+#define REAL_EPS 5.960464478e-8
+
 #include "UnityCG.cginc"
 Texture2D<float4> _DepthTexture;
+Texture2D<float4> _NormalsTexture;
 float4x4 _WorldToCamera;
 float4x4 _CameraToWorld;
 float4x4 _CameraInverseProjection;
@@ -11,6 +14,23 @@ float4x4 _CameraProjection;
 float4x4 _ViewProjection;
 float _NearClipValue;
 float _FarClipValue;
+
+float CopySign(float x, float s) {
+    return (s >= 0) ? abs(x) : -abs(x);
+}
+
+float3 UnpackNormalOctRectEncode(float2 f) {
+    float r = f.r, g = f.g;
+
+    // Solve for {x, y, z} given {r, g}.
+    float x = 0.5 + 0.5 * g - abs(r);
+    float y = g - x;
+    float z = max(1.0 - abs(x) - abs(y), REAL_EPS); // EPS is absolutely crucial for anisotropy
+
+    float3 p = float3(x, y, CopySign(z, r));
+
+    return normalize(p);
+}
 
 struct Point {
     float3 position;
@@ -64,6 +84,21 @@ void ComputePoint(inout Point p) {
     //p.position.y = max(p.position.y,0);
 }
 
+float2 WorldPositionToUV(float3 worldPosition) {
+    float4 uv = mul(_ViewProjection, float4(worldPosition,1));
+    uv = uv/uv.w;
+    float2 realuv = float2(uv.xy)*0.5+0.5;
+    return realuv;
+}
+
+float3 GetScreenNormalAtPosition(float3 worldPosition) {
+    float2 realuv = WorldPositionToUV(worldPosition);
+    uint width, height;
+    _NormalsTexture.GetDimensions(width, height);
+    uint2 irealuv = realuv*uint2(width,height);
+    return mul(_CameraToWorld, float4(UnpackNormalOctRectEncode(_NormalsTexture[irealuv].xy).xyz,0)).xyz;
+}
+
 
 float GetScreenDepthAtPosition(float3 worldPosition, float defaultDistance) {
     // Need the full view projection matrix to figure out where the point lays in texture space.
@@ -101,22 +136,13 @@ void DepthCollide(inout Point p, uint3 id) {
     if (pDistance-screenDist < depthThickness && pDistance > screenDist) {
         float3 camForward = mul(_CameraToWorld, float4(0,0,1,0)).xyz;
         float3 camUp = mul(_CameraToWorld, float4(0,1,0,0)).xyz;
-        // Guess if we're on a floor or not.
-        float slightlyUpDist = GetScreenDepthAtPosition(p.position+camUp*0.05, screenDist);
         float3 ndir = normalize(dir);
-        float floornessDist = abs(slightlyUpDist-screenDist);
-        float screenFloorness = saturate(floornessDist*10);
-        float worldFloorness = lerp(screenFloorness, 1-screenFloorness, saturate(dot(camForward,normalize(_Gravity))));
         float3 newPos = (ndir*screenDist)+camWS; 
 
-        // only do the camera crawl adjustment if we have two "valid" points
-        if (floornessDist < 1) {
-            // Compensate for crawling towards the camera by solving for one of the triangle edges
-            float3 edge = (p.position-newPos);
-            edge.y = 0;
-            // modify it by how much we are on a "floor"
-            newPos = lerp(newPos, newPos+edge, worldFloorness);
-        }
+        float3 normal = GetScreenNormalAtPosition(p.position);
+        float scalarProject = dot(normal, newPos-p.position);
+        float3 project = normal*scalarProject;
+        newPos = project+p.position;
 
         // Bounce a little
         p.prevPosition = lerp(p.prevPosition, newPos, 0.9f);

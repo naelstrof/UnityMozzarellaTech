@@ -66,8 +66,8 @@ public class Mozzarella : MonoBehaviour {
         public int numParticlesID, pointsID, gravityID,
         lengthID, depthTextureID, worldToCameraID,
         cameraInverseProjectionID, cameraVPID, cameraToWorldID,
-        nearClipValueID, cameraDepthID,
-        farClipValueID, numSquirtsID, squirtsID,
+        nearClipValueID, cameraDepthID, normalsTextureID,
+        farClipValueID, numSquirtsID, squirtsID, cameraNormalsID,
         deltaTimeID, squirtIncrementAmountID, mainKernel;
         public MozzarellaShaderBlock(ComputeShader shader) {
             pointsID = Shader.PropertyToID("_Points");
@@ -76,6 +76,7 @@ public class Mozzarella : MonoBehaviour {
             lengthID = Shader.PropertyToID("_Length");
             numParticlesID = Shader.PropertyToID("_NumParticles");
             depthTextureID = Shader.PropertyToID("_DepthTexture");
+            normalsTextureID = Shader.PropertyToID("_NormalsTexture");
             worldToCameraID = Shader.PropertyToID("_WorldToCamera");
             cameraToWorldID = Shader.PropertyToID("_CameraToWorld");
             cameraInverseProjectionID = Shader.PropertyToID("_CameraInverseProjection");
@@ -85,11 +86,13 @@ public class Mozzarella : MonoBehaviour {
             squirtsID = Shader.PropertyToID("_Squirts");
             numSquirtsID = Shader.PropertyToID("_NumSquirts");
             cameraDepthID = Shader.PropertyToID("_CameraDepthTexture");
+            cameraNormalsID = Shader.PropertyToID("_CameraNormalsTexture");
             squirtIncrementAmountID = Shader.PropertyToID("_SquirtIncrementAmount");
             mainKernel = shader.FindKernel(Mozzarella.mainKernelName);
         }
     }
     void Awake() {
+        // FIXME: Must run with SSAO enabled on URP in order to get the normals texture. Don't know how to check for that without a direct reference. Blegh!
         // First we gotta get our own local copy
         verletProcessor = ComputeShader.Instantiate(verletProcessor);
         shaderProperties = new MozzarellaShaderBlock(verletProcessor);
@@ -120,6 +123,9 @@ public class Mozzarella : MonoBehaviour {
         if (Shader.GetGlobalTexture(shaderProperties.cameraDepthID) == null) {
             return;
         }
+        if (Shader.GetGlobalTexture(shaderProperties.cameraNormalsID) == null) {
+            return;
+        }
         float volume = Mathf.Clamp01(Mathf.Sin(Time.time*5f));
         verletProcessor.SetBuffer(0, shaderProperties.pointsID, pointsBuffer);
         verletProcessor.SetInt(shaderProperties.numParticlesID, numParticles);
@@ -141,6 +147,7 @@ public class Mozzarella : MonoBehaviour {
         verletProcessor.SetFloat(shaderProperties.nearClipValueID, Camera.main.nearClipPlane);
         verletProcessor.SetFloat(shaderProperties.farClipValueID, Camera.main.farClipPlane);
         verletProcessor.SetTextureFromGlobal(0, shaderProperties.depthTextureID, shaderProperties.cameraDepthID);
+        verletProcessor.SetTextureFromGlobal(0, shaderProperties.normalsTextureID, shaderProperties.cameraNormalsID);
 
         // Points update
         verletProcessor.Dispatch(shaderProperties.mainKernel, numParticles, 1, 1);
