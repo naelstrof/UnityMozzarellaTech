@@ -6,13 +6,56 @@
 RWTexture2D<float4> Result;
 #include "UnityCG.cginc"
 Texture2D<float4> _DepthTexture;
+Texture2D<float4> _NormalsTexture;
 float4x4 _WorldToCamera;
 float4x4 _CameraToWorld;
 float4x4 _CameraInverseProjection;
 float4x4 _CameraProjection;
 float4x4 _ViewProjection;
+float4x4 _InverseViewProjection;
 float _NearClipValue;
 float _FarClipValue;
+
+
+#define REAL_EPS 5.960464478e-8
+float CopySign(float x, float s) {
+    return (s >= 0) ? abs(x) : -abs(x);
+}
+float3 UnpackNormalOctRectEncode(float2 f) {
+    float r = f.r, g = f.g;
+
+    // Solve for {x, y, z} given {r, g}.
+    float x = 0.5 + 0.5 * g - abs(r);
+    float y = g - x;
+    float z = max(1.0 - abs(x) - abs(y), REAL_EPS); // EPS is absolutely crucial for anisotropy
+
+    float3 p = float3(x, y, CopySign(z, r));
+
+    return normalize(p);
+}
+float2 WorldPositionToUV(float3 worldPosition) {
+    float4 uv = mul(_ViewProjection, float4(worldPosition,1));
+    uv = uv/uv.w;
+    float2 realuv = float2(uv.xy)*0.5+0.5;
+    return realuv;
+}
+
+float3 GetScreenNormal(float2 uv) {
+    uint width, height;
+    _NormalsTexture.GetDimensions(width, height);
+    uint2 irealuv = uv*uint2(width,height);
+    return UnpackNormalOctRectEncode(_NormalsTexture[irealuv].xy) * float3(1.0, 1.0, -1.0);
+}
+
+float3 GetScreenNormalAtPosition(float3 worldPosition) {
+    float2 realuv = WorldPositionToUV(worldPosition);
+    return GetScreenNormal(realuv);
+}
+
+float3 GetScreenNormalInt(uint2 uv) {
+    float3 sceneNormal = UnpackNormalOctRectEncode(_NormalsTexture[uv].xy);
+    return normalize(mul(_CameraToWorld, float4(sceneNormal.xyz,0)));
+}
 
 [numthreads(8,8,1)]
 void CSMain (uint3 id : SV_DispatchThreadID) {
@@ -45,14 +88,15 @@ void CSMain (uint3 id : SV_DispatchThreadID) {
     float rep = frac(screenDist);
 
     // Depth test
-    if (sourceid.x == uint(realuv.x*swidth) || sourceid.y == uint(realuv.y*sheight)) {
-        Result[id.xy] = float4(0,1,0,1);
-    } else {
-        if (abs(testScreenDist-screenDist) < 1) {
-            Result[id.xy] = float4(1,0,0,1);
+    //if (sourceid.x == uint(realuv.x*swidth) || sourceid.y == uint(realuv.y*sheight)) {
+        //Result[id.xy] = float4(0,1,0,1);
+    //} else {
+        //if (abs(testScreenDist-screenDist) < 1) {
+            //Result[id.xy] = float4(1,0,0,1);
         //Crosshair test
-        } else {
-            Result[id.xy] = float4(rep,rep,rep,1);
-        }
-    }
+        //} else {
+            float3 normalA = abs(GetScreenNormalInt(sourceid.xy));
+                Result[id.xy] = float4((normalA).xyz,1);
+        //}
+    //}
 }
