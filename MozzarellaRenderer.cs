@@ -8,17 +8,19 @@ public class MozzarellaRenderer : MonoBehaviour {
     [SerializeField]
     private Mesh mesh;
     [SerializeField]
-    private Material material;
+    public Material material;
     private static int pointsID;
     private static int pointsScaleID;
-    public void Start() {
+    void Awake() {
+        material = Material.Instantiate(material);
+    }
+    void Start() {
         mozzarella = GetComponent<Mozzarella>();
         pointsID = Shader.PropertyToID("_Points");
         pointsScaleID = Shader.PropertyToID("_PointScale");
-        material = Material.Instantiate(material);
         material.SetBuffer(pointsID, mozzarella.pointsBuffer);
     }
-    public void Update() {
+    void Update() {
         material.SetFloat(pointsScaleID, mozzarella.pointScale);
         // Draw to screen
         Graphics.DrawMeshInstancedProcedural(mesh, 0, material, new Bounds(Vector3.zero, Vector3.one*1000f), mozzarella.numParticles);
