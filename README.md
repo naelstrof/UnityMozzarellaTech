@@ -7,7 +7,7 @@ A gpu-based verlet solver that solves thousands of particle chains colliding wit
 Communication between the GPU and CPU have been constrained for maximum performance.
 
 ## Installation
-Simply add `https://github.com/naelstrof/MozzarellaTech.git#upm` as a package using the package manager.
+Simply add `https://github.com/naelstrof/UnityMozzarellaTech.git#upm` as a package using the package manager.
 
 ## Usage
 Simply add a Mozzarella monobehavior, and make sure it has at least one Squirt, one of the included materials, an arbitrary mesh, and the included MozzarellaVerlet compute shader added like so: 
