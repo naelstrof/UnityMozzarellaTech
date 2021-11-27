@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numParticles: 2048
   squirtVolume: 3
-  pointScale: 0.05
+  stickLength: 0.01
   squirts:
   - position: {x: 0, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
@@ -1920,7 +1920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numParticles: 4096
   squirtVolume: 6
-  pointScale: 0.1
+  stickLength: 0.01
   squirts:
   - position: {x: 0, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
