@@ -1154,7 +1154,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  projector: {fileID: 2100000, guid: 169beda2b444ba64f88614bea679312d, type: 2}
+  projector: {fileID: 2100000, guid: 0aedd8bc1c4736945999458791d86fe5, type: 2}
 --- !u!114 &1442396549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1905,7 +1905,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  projector: {fileID: 2100000, guid: 169beda2b444ba64f88614bea679312d, type: 2}
+  projector: {fileID: 2100000, guid: 0aedd8bc1c4736945999458791d86fe5, type: 2}
 --- !u!114 &2085651400
 MonoBehaviour:
   m_ObjectHideFlags: 0

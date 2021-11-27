@@ -25,14 +25,6 @@ public class MozzarellaDecals : MonoBehaviour {
     }
     void DrawDecal(MozzarellaHitEventListener.HitEvent hitEvent) {
         float size = hitEvent.volume*decalSize;
-        int hits = Physics.OverlapSphereNonAlloc(hitEvent.position, size, colliders, hitMask, QueryTriggerInteraction.UseGlobal );
-        for (int i=0;i<hits;i++) {
-            Collider c = colliders[i];
-            Renderer renderer = c.GetComponent<Renderer>();
-            if (renderer == null) {
-                continue;
-            }
-            SkinnedMeshDecals.PaintDecal.RenderDecal(renderer, projector, hitEvent.position - Vector3.forward*size*0.5f, Quaternion.identity, Vector2.one*size*0.5f, size);
-        }
+        SkinnedMeshDecals.PaintDecal.RenderDecalInSphere(hitEvent.position, size, projector, Quaternion.identity, hitMask);
     }
 }
