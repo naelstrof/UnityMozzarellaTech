@@ -998,13 +998,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442396543}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.929, y: 1.03, z: -0.656}
+  m_LocalRotation: {x: -0, y: -0, z: -0.49999917, w: 0.8660259}
+  m_LocalPosition: {x: 1.586, y: 1.027, z: 0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -60}
 --- !u!114 &1442396545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,8 +1093,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  velocityMultiplier: 0.05
-  velocityVariance: 0.05
+  velocityMultiplier: 0.1
+  velocityVariance: 0.01
 --- !u!114 &1442396546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,6 +1109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
   material: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  pointRadius: 0.1
 --- !u!114 &1442396547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,7 +1124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numParticles: 2048
   squirtVolume: 3
-  stickLength: 0.01
+  viscosity: 0.8
   squirts:
   - position: {x: 0, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
@@ -1393,7 +1394,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587264459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.053, y: 0.995, z: -0.742}
+  m_LocalPosition: {x: 2, y: 0.995, z: 0.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1920,7 +1921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numParticles: 4096
   squirtVolume: 6
-  stickLength: 0.01
+  viscosity: 0.05
   squirts:
   - position: {x: 0, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
@@ -1953,6 +1954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 289301614986012343, guid: 38f7e3d8b22dce84b9bcb74f275ff305, type: 3}
   material: {fileID: 2100000, guid: fcf76e5dfc6afe148a02b81d34ecb574, type: 2}
+  pointRadius: 0.1
 --- !u!114 &2085651402
 MonoBehaviour:
   m_ObjectHideFlags: 0

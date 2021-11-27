@@ -26,7 +26,7 @@ public class MozzarellaSquirter : MonoBehaviour {
         while(Time.time < startTime+duration) {
             float t = (Time.time-startTime)/duration;
 
-            float volume = UnityEngine.Random.Range(0f,1f) < 0.05f ? volumeCurve.Evaluate(t)/8f : volumeCurve.Evaluate(t);
+            float volume = volumeCurve.Evaluate(t);
 
             mozzarella.squirts[i] = new Mozzarella.Squirt(transform.position,
             Vector3.up*0.025f+transform.up*velocityCurve.Evaluate(t)*velocityMultiplier+UnityEngine.Random.insideUnitSphere*velocityVariance,

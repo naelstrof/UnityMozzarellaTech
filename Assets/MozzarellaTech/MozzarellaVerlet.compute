@@ -60,7 +60,7 @@ RWStructuredBuffer<HitEvent> _HitEvents;
 float3 _Gravity;
 
 float _DeltaTime;
-float _Length;
+float _Viscosity;
 uint _NumParticles;
 
 RWStructuredBuffer<Point> _Points;
@@ -78,10 +78,13 @@ void FinishPointCalc(inout Point p) {
     p.prevPosition = p.savedPosition;
 }
 
-void ComputePoint(inout Point p) {
+void ComputePointVelocity(inout Point p) {
     p.position += (p.position - p.prevPosition)*0.99;
-    p.position += _Gravity * _DeltaTime * _DeltaTime;
     //p.position.y = max(p.position.y,0);
+}
+
+void ComputePointGravity(inout Point p) {
+    p.position += _Gravity * _DeltaTime * _DeltaTime;
 }
 
 float2 WorldPositionToUV(float3 worldPosition) {
@@ -158,21 +161,21 @@ void DepthCollide(inout Point p, uint3 id) {
     }
 }
 
-void ComputeStick(inout Point a, Point b) {
-    float diff = a.position-b.position;
+void ComputeAttraction(inout Point a, Point b) {
+    float3 diff = b.position-a.position;
     float dist = length(diff);
 
-    // stick constraint
     if (dist > 0) {
-        float3 stickCenter = (a.position + b.position)*0.5;
-        float3 stickDir = normalize(diff);
-        float inverseAdjust = 1.0-saturate(a.volume*b.volume);
-        a.position = lerp(stickCenter + stickDir * _Length * 0.5, a.position, (inverseAdjust*inverseAdjust));
+        float factor = 1.0/dist;
+        float positionChange = factor*_DeltaTime;
+        float adjust = (a.volume*b.volume);
+        float maxMovement = min(positionChange, dist*0.5)*(adjust*adjust);
+        a.position += normalize(diff)*maxMovement;
     }
-
+    
     // Adjust volume by distance
-    float shrinkGrowSpeed = 0.15;
-    float newVolume = a.volume+(_Length-dist)*shrinkGrowSpeed;
+    float shrinkGrowSpeed = 1.0-_Viscosity;
+    float newVolume = a.volume-dist*shrinkGrowSpeed;
     a.volume = lerp(a.volume, saturate(newVolume), saturate(sign(b.volume)));
 }
 
@@ -182,7 +185,7 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
         for(uint j=0;j<_SquirtIncrementAmount;j++) {
             if (id.x == _Squirts[i].index+j) {
                 _Points[id.x].prevPosition = _Squirts[i].position-_Squirts[i].velocity;
-                _Points[id.x].position = _Squirts[i].position;
+                _Points[id.x].position = _Squirts[i].position + _Squirts[i].velocity * (float(j)/float(_SquirtIncrementAmount)) * 0.001;
                 _Points[id.x].volume = _Squirts[i].volume;
                 int lastID = (id.x+1)%_NumParticles;
                 _Points[lastID].volume = 0;
@@ -193,10 +196,11 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
         return;
     }
     StartPointCalc(_Points[id.x]);
+    ComputePointVelocity(_Points[id.x]);
+    ComputeAttraction(_Points[id.x], _Points[(id.x+1)%(_NumParticles)]);
+    ComputeAttraction(_Points[id.x], _Points[(id.x-1+_NumParticles)%(_NumParticles)]);
+    ComputePointGravity(_Points[id.x]);
     DepthCollide(_Points[id.x],id);
-    ComputePoint(_Points[id.x]);
-    ComputeStick(_Points[id.x], _Points[(id.x+1)%(_NumParticles)]);
-    ComputeStick(_Points[id.x], _Points[(id.x-1+_NumParticles)%(_NumParticles)]);
     FinishPointCalc(_Points[id.x]);
 }
 
