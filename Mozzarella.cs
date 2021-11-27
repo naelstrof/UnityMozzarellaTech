@@ -12,7 +12,8 @@ public class Mozzarella : MonoBehaviour {
     [Range(1,8)]
     public int squirtVolume = 1;
     [Range(0.01f, 1f)]
-    public float pointScale = 0.1f;
+    [SerializeField]
+    private float stickLength = 0.05f;
     public List<Squirt> squirts;
     //public Mesh mesh;
     //private Material instantiatedMeshMaterial;
@@ -61,6 +62,10 @@ public class Mozzarella : MonoBehaviour {
         public Vector3 velocity;
         public float volume;
         public uint index;
+    }
+    public void SetStickLength(float stickLength) {
+        this.stickLength = stickLength;
+        verletProcessor.SetFloat(shaderProperties.lengthID, stickLength);
     }
     private class MozzarellaShaderBlock {
         public int numParticlesID, pointsID, gravityID,
@@ -114,9 +119,9 @@ public class Mozzarella : MonoBehaviour {
             squirts[i] = new Squirt(squirts[i], (uint)(i*(numParticles/squirts.Count)));
         }
         squirtsBuffer.SetData<Squirt>(squirts);
-        verletProcessor.SetVector(shaderProperties.gravityID, Physics.gravity*0.4f);
+        verletProcessor.SetVector(shaderProperties.gravityID, Physics.gravity);
         verletProcessor.SetFloat(shaderProperties.deltaTimeID, Time.fixedDeltaTime);
-        verletProcessor.SetFloat(shaderProperties.lengthID, 0.25f*Time.fixedDeltaTime);
+        verletProcessor.SetFloat(shaderProperties.lengthID, stickLength);
         verletProcessor.SetInt(shaderProperties.squirtIncrementAmountID, squirtVolume);
     }
     void FixedUpdate() {
