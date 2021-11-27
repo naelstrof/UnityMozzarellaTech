@@ -9,6 +9,7 @@ public class MozzarellaRenderer : MonoBehaviour {
     private Mesh mesh;
     [SerializeField]
     public Material material;
+    [SerializeField]
     [Range(0.001f, 1f)]
     private float pointRadius = 0.1f;
     private static int pointsID;

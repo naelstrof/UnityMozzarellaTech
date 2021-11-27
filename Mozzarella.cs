@@ -11,9 +11,9 @@ public class Mozzarella : MonoBehaviour {
     public int numParticles = 512;
     [Range(1,8)]
     public int squirtVolume = 1;
-    [Range(0.01f, 1f)]
+    [Range(0f, 1f)]
     [SerializeField]
-    private float stickLength = 0.05f;
+    private float viscosity = 0.8f;
     public List<Squirt> squirts;
     //public Mesh mesh;
     //private Material instantiatedMeshMaterial;
@@ -63,13 +63,13 @@ public class Mozzarella : MonoBehaviour {
         public float volume;
         public uint index;
     }
-    public void SetStickLength(float stickLength) {
-        this.stickLength = stickLength;
-        verletProcessor.SetFloat(shaderProperties.lengthID, stickLength);
+    public void SetViscosity(float viscosity) {
+        this.viscosity = viscosity;
+        verletProcessor.SetFloat(shaderProperties.viscosityID, viscosity);
     }
     private class MozzarellaShaderBlock {
         public int numParticlesID, pointsID, gravityID,
-        lengthID, depthTextureID, worldToCameraID,
+        viscosityID, depthTextureID, worldToCameraID,
         cameraInverseProjectionID, cameraVPID, cameraToWorldID,
         nearClipValueID, cameraDepthID, normalsTextureID,
         farClipValueID, numSquirtsID, squirtsID, cameraNormalsID,
@@ -78,7 +78,7 @@ public class Mozzarella : MonoBehaviour {
             pointsID = Shader.PropertyToID("_Points");
             deltaTimeID = Shader.PropertyToID("_DeltaTime");
             gravityID = Shader.PropertyToID("_Gravity");
-            lengthID = Shader.PropertyToID("_Length");
+            viscosityID = Shader.PropertyToID("_Viscosity");
             numParticlesID = Shader.PropertyToID("_NumParticles");
             depthTextureID = Shader.PropertyToID("_DepthTexture");
             normalsTextureID = Shader.PropertyToID("_NormalsTexture");
@@ -121,7 +121,7 @@ public class Mozzarella : MonoBehaviour {
         squirtsBuffer.SetData<Squirt>(squirts);
         verletProcessor.SetVector(shaderProperties.gravityID, Physics.gravity);
         verletProcessor.SetFloat(shaderProperties.deltaTimeID, Time.fixedDeltaTime);
-        verletProcessor.SetFloat(shaderProperties.lengthID, stickLength);
+        verletProcessor.SetFloat(shaderProperties.viscosityID, viscosity);
         verletProcessor.SetInt(shaderProperties.squirtIncrementAmountID, squirtVolume);
     }
     void FixedUpdate() {
