@@ -14,6 +14,16 @@ public class Mozzarella : MonoBehaviour {
     [Range(0f, 1f)]
     [SerializeField]
     private float viscosity = 0.8f;
+    private float particleLifeTime { 
+        get {
+            int totalParticles = numParticles/squirts.Count;
+            float framesPerSecond = 1f/Time.fixedDeltaTime;
+            int particlesPerFrame = squirtVolume;
+            float particlesPerSecond = squirtVolume*framesPerSecond;
+            float lifeTime = ((float)totalParticles)/particlesPerSecond;
+            return lifeTime;
+        }
+    }
     public List<Squirt> squirts;
     //public Mesh mesh;
     //private Material instantiatedMeshMaterial;
@@ -30,7 +40,7 @@ public class Mozzarella : MonoBehaviour {
     private MozzarellaShaderBlock shaderProperties;
     public delegate void PointsUpdatedAction();
     public PointsUpdatedAction onPointsUpdated;
-    private bool dirty = false;
+    private float timer;
 
     private struct Point {
         public Vector3 position;
@@ -124,7 +134,22 @@ public class Mozzarella : MonoBehaviour {
         verletProcessor.SetFloat(shaderProperties.viscosityID, viscosity);
         verletProcessor.SetInt(shaderProperties.squirtIncrementAmountID, squirtVolume);
     }
+    bool ShouldUpdate() {
+        foreach(var squirt in squirts) {
+            if (squirt.volume > 0f) {
+                return true;
+            }
+        }
+        return false;
+    }
     void FixedUpdate() {
+        if (ShouldUpdate()) {
+            timer = particleLifeTime;
+        }
+        if (timer <= 0f) {
+            return;
+        }
+        timer -= Time.deltaTime;
         if (Shader.GetGlobalTexture(shaderProperties.cameraDepthID) == null) {
             return;
         }
@@ -156,16 +181,16 @@ public class Mozzarella : MonoBehaviour {
 
         // Points update
         verletProcessor.Dispatch(shaderProperties.mainKernel, numParticles, 1, 1);
-        dirty = true;
-    }
-    void Update() {
-        if (dirty) {
-            onPointsUpdated?.Invoke();
-            dirty = false;
-        }
+        onPointsUpdated?.Invoke();
     }
     void OnDestroy() {
         pointsBuffer.Dispose();
         squirtsBuffer.Dispose();
+    }
+    void OnValidate() {
+        if (Application.isPlaying && verletProcessor != null && shaderProperties != null) {
+            verletProcessor.SetInt(shaderProperties.squirtIncrementAmountID, squirtVolume);
+            verletProcessor.SetFloat(shaderProperties.viscosityID, viscosity);
+        }
     }
 }
