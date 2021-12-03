@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0021ca6d997f2a64f8a4a8f0c9cc6660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squirtDuration: 0.3
+  squirtDuration: 0.35
   volumeCurve:
     serializedVersion: 2
     m_Curve:
@@ -1033,26 +1033,26 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.12038082
       value: 0.9529815
-      inSlope: 0.48158538
-      outSlope: 0.48158538
+      inSlope: 0.57708967
+      outSlope: 0.57708967
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.9718048
       outWeight: 0.13893957
     - serializedVersion: 3
-      time: 0.767444
-      value: 0.6891571
-      inSlope: -1.2894218
-      outSlope: -1.2894218
+      time: 0.75552106
+      value: 0.57811344
+      inSlope: -1.1476387
+      outSlope: -1.1476387
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.35859928
+      outWeight: 0.31049624
     - serializedVersion: 3
       time: 1
-      value: 0.3258427
-      inSlope: -1.5622665
-      outSlope: -1.5622665
+      value: 0.3
+      inSlope: -1.1375762
+      outSlope: -1.1375762
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -1066,35 +1066,35 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0.4946365
-      inSlope: 4.0222073
-      outSlope: 4.0222073
+      inSlope: 2.6440203
+      outSlope: 2.6440203
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.05599748
+      outWeight: 0.12576419
     - serializedVersion: 3
-      time: 0.39728466
-      value: 0.9927063
-      inSlope: -0.16851479
-      outSlope: -0.16851479
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0.033958226
-      inSlope: -0.15451616
-      outSlope: -0.15451616
+      time: 0.3016277
+      value: 0.998256
+      inSlope: 0.04922456
+      outSlope: 0.04922456
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.2363227
+      inWeight: 0.33333334
+      outWeight: 0.0985968
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18589406
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   velocityMultiplier: 0.1
-  velocityVariance: 0.01
+  velocityVariance: 0.014
 --- !u!114 &1442396546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,8 +1123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numParticles: 2048
-  squirtVolume: 3
-  viscosity: 0.8
+  squirtVolume: 2
+  viscosity: 0.9
   squirts:
   - position: {x: 0, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
@@ -1921,7 +1921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numParticles: 4096
   squirtVolume: 6
-  viscosity: 0.05
+  viscosity: 0.94
   squirts:
   - position: {x: 0, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}

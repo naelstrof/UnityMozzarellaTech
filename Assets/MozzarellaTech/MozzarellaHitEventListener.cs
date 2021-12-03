@@ -8,6 +8,7 @@ public class MozzarellaHitEventListener : MonoBehaviour {
     [Range(2, 16)]
     public int hitEventCount = 8;
     private ComputeBuffer hitEventsBuffer;
+    private HitEvent[] hitEventsGet;
     private static int hitEventsID;
     private static int clearHitEventKernel;
     private static int hitEventCountID;
@@ -28,6 +29,7 @@ public class MozzarellaHitEventListener : MonoBehaviour {
         mozzarella = GetComponent<Mozzarella>();
         mozzarella.verletProcessor.EnableKeyword("HIT_EVENTS");
         hitEventsBuffer = new ComputeBuffer(hitEventCount, sizeof(float)*4);
+        hitEventsGet = new HitEvent[hitEventCount];
         for(int i=0;i<hitEventCount;i++) {
             hitEvents.Add(new HitEvent(){position = Vector3.zero, volume = 0f});
         }
@@ -39,7 +41,19 @@ public class MozzarellaHitEventListener : MonoBehaviour {
         mozzarella.onPointsUpdated += OnPointsUpdated;
     }
     void OnPointsUpdated() {
-        AsyncGPUReadback.Request(hitEventsBuffer, sizeof(float)*4*hitEventCount, 0, GetHitEvents);
+        if (SystemInfo.supportsAsyncGPUReadback) {
+            AsyncGPUReadback.Request(hitEventsBuffer, sizeof(float)*4*hitEventCount, 0, GetHitEvents);
+        } else {
+            hitEventsBuffer.GetData(hitEventsGet);
+            hitEvents.Clear();
+            foreach(var hitEvent in hitEventsGet) {
+                if (hitEvent.volume != 0f) {
+                    hitEvents.Add(hitEvent);
+                }
+            }
+            OnDepthBufferHit?.Invoke(hitEvents);
+            mozzarella.verletProcessor.Dispatch(clearHitEventKernel, hitEventCount, 1, 1);
+        }
     }
     void GetHitEvents(AsyncGPUReadbackRequest request) {
         if (!Application.isPlaying) {
