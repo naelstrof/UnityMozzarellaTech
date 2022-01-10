@@ -35,17 +35,7 @@ float3 UnpackNormalOctRectEncode(float2 f) {
 struct Point {
     float3 position;
     float3 prevPosition;
-    float3 savedPosition;
     float volume;
-};
-
-uint _SquirtIncrementAmount;
-uint _NumSquirts;
-struct Squirt {
-    float3 position;
-    float3 velocity;
-    float volume;
-    uint index;
 };
 
 #if HIT_EVENTS
@@ -61,21 +51,16 @@ float3 _Gravity;
 
 float _DeltaTime;
 float _Viscosity;
+float _Friction;
+float _AttractionStrength;
 uint _NumParticles;
 
 RWStructuredBuffer<Point> _Points;
-StructuredBuffer<Squirt> _Squirts;
 
 float hash13(float3 p3) {
 	p3 = frac(p3 * .1031);
     p3 += dot(p3, p3.zyx + 31.32);
     return frac((p3.x + p3.y) * p3.z);
-}
-void StartPointCalc(inout Point p) {
-    p.savedPosition = p.position;
-}
-void FinishPointCalc(inout Point p) {
-    p.prevPosition = p.savedPosition;
 }
 
 void ComputePointVelocity(inout Point p) {
@@ -130,7 +115,7 @@ float GetScreenDepthAtPosition(float3 worldPosition, float defaultDistance) {
     return centerDepth;
 }
 
-void DepthCollide(inout Point p, uint3 id) {
+/*void DepthCollide(inout Point p, uint3 id) {
     float screenDist = GetScreenDepthAtPosition(p.position,10000000);
     float3 camWS = mul(_CameraToWorld, float4(0,0,0,1)).xyz;
     float3 dir = p.position-camWS;
@@ -148,8 +133,7 @@ void DepthCollide(inout Point p, uint3 id) {
         newPos = project+p.position;
 
         // Bounce a little
-        p.prevPosition = lerp(p.prevPosition, newPos, 0.9f);
-        p.savedPosition = p.prevPosition;
+        p.prevPosition = lerp(newPos, p.prevPosition, _Bounciness);
         p.position = newPos;
 
         #if HIT_EVENTS
@@ -159,17 +143,17 @@ void DepthCollide(inout Point p, uint3 id) {
         _HitEvents[hitID].volume = p.volume;
         #endif
     }
-}
+}*/
 
 void ComputeAttraction(inout Point a, Point b) {
     float3 diff = b.position-a.position;
     float dist = length(diff);
 
     if (dist > 0) {
-        float factor = 1.0/dist;
-        float positionChange = factor*_DeltaTime;
+        float factor = _AttractionStrength/dist;
+        float positionChange = factor*_DeltaTime*_AttractionStrength;
         float adjust = (a.volume*b.volume);
-        float maxMovement = min(positionChange, dist*0.5)*(adjust*adjust);
+        float maxMovement = min(positionChange*(adjust*adjust), dist*0.5);
         a.position += normalize(diff)*maxMovement;
     }
     
@@ -181,27 +165,45 @@ void ComputeAttraction(inout Point a, Point b) {
 
 [numthreads(64,1,1)]
 void PointsMain (uint3 id : SV_DispatchThreadID) {
-    for(uint i=0;i<_NumSquirts;i++) {
-        for(uint j=0;j<_SquirtIncrementAmount;j++) {
-            if (id.x == _Squirts[i].index+j) {
-                _Points[id.x].prevPosition = _Squirts[i].position-_Squirts[i].velocity;
-                _Points[id.x].position = _Squirts[i].position + _Squirts[i].velocity * (float(j)/float(_SquirtIncrementAmount)) * 0.001;
-                _Points[id.x].volume = _Squirts[i].volume;
-                int lastID = (id.x+1)%_NumParticles;
-                _Points[lastID].volume = 0;
-            }
-        }
-    }
     if (_Points[id.x].volume == 0) {
         return;
     }
-    StartPointCalc(_Points[id.x]);
+    float3 savedPosition = _Points[id.x].position;
     ComputePointVelocity(_Points[id.x]);
     ComputeAttraction(_Points[id.x], _Points[(id.x+1)%(_NumParticles)]);
     ComputeAttraction(_Points[id.x], _Points[(id.x-1+_NumParticles)%(_NumParticles)]);
     ComputePointGravity(_Points[id.x]);
-    DepthCollide(_Points[id.x],id);
-    FinishPointCalc(_Points[id.x]);
+
+    // DepthCollide
+    float screenDist = GetScreenDepthAtPosition(_Points[id.x].position,10000000);
+    float3 camWS = mul(_CameraToWorld, float4(0,0,0,1)).xyz;
+    float3 dir = _Points[id.x].position-camWS;
+    float pDistance = length(dir);
+    float depthThickness = 0.5f;
+    if (pDistance-screenDist < depthThickness && pDistance > screenDist) {
+        float3 camForward = mul(_CameraToWorld, float4(0,0,1,0)).xyz;
+        float3 camUp = mul(_CameraToWorld, float4(0,1,0,0)).xyz;
+        float3 ndir = normalize(dir);
+        float3 newPos = (ndir*screenDist)+camWS; 
+
+        float3 normal = GetScreenNormalAtPosition(_Points[id.x].position);
+        float scalarProject = dot(normal, newPos-_Points[id.x].position);
+        float3 project = normal*scalarProject;
+        newPos = project+_Points[id.x].position;
+
+        // friction
+        savedPosition = lerp(savedPosition, newPos, _Friction);
+        _Points[id.x].position = newPos;
+
+        #if HIT_EVENTS
+        // Register a hit event
+        uint hitID = hash13(newPos)*(_NumHitEvents-1);
+        _HitEvents[hitID].position = newPos;
+        _HitEvents[hitID].volume = _Points[id.x].volume;
+        #endif
+    }
+
+    _Points[id.x].prevPosition = savedPosition;
 }
 
 [numthreads(64,1,1)]
