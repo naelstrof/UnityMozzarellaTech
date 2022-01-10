@@ -1,7 +1,6 @@
 struct Point {
     float3 position;
     float3 prevPosition;
-    float3 savedPosition;
     float volume;
 };
 float _PointScale;
