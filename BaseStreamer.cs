@@ -20,7 +20,6 @@ public class BaseStreamer : MonoBehaviour {
                 position = streamer.transform.position,
                 prevPosition = streamer.transform.position-Vector3.up,
                 volume = 1f,
-                registerHitEvent = 1
             };
         }
     }

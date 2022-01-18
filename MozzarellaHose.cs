@@ -31,7 +31,6 @@ public class MozzarellaHose : BaseStreamer {
                 position = hose.transform.position,
                 prevPosition = hose.transform.position - velocity,
                 volume = volume,
-                registerHitEvent = 1
             };
         }
     }
