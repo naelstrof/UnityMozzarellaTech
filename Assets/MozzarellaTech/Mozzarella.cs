@@ -28,12 +28,18 @@ public class Mozzarella : MonoBehaviour {
     private MozzarellaShaderBlock shaderProperties;
     public delegate void PointsUpdatedAction();
     public PointsUpdatedAction onPointsUpdated;
-    private float timer;
+    public bool visible {
+        get { 
+            return timeUntilCull > Time.time;
+        }
+    }
+    private float timeUntilCull;
 
     public struct Point {
         public Vector3 position;
         public Vector3 prevPosition;
         public float volume;
+        public float registerHitEvent;
     }
     private class MozzarellaShaderBlock {
         public int numParticlesID, pointsID, gravityID,
@@ -69,12 +75,15 @@ public class Mozzarella : MonoBehaviour {
         verletProcessor = ComputeShader.Instantiate(verletProcessor);
         shaderProperties = new MozzarellaShaderBlock(verletProcessor);
 
-        pointsBuffer = new ComputeBuffer(numParticles, sizeof(float)*7);
+        pointsBuffer = new ComputeBuffer(numParticles, sizeof(float)*8);
         List<Point> startingPoints = new List<Point>();
         for(int i=0;i<numParticles;i++) {
             startingPoints.Add(new Point());
         }
         pointsBuffer.SetData<Point>(startingPoints);
+    }
+    public void SetVisibleUntil(float time) {
+        timeUntilCull = time;
     }
     void Start() {
         verletProcessor.SetVector(shaderProperties.gravityID, Physics.gravity);

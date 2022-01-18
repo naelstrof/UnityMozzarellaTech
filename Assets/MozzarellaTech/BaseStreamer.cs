@@ -19,7 +19,8 @@ public class BaseStreamer : MonoBehaviour {
             return new Mozzarella.Point() {
                 position = streamer.transform.position,
                 prevPosition = streamer.transform.position-Vector3.up,
-                volume = 1f
+                volume = 1f,
+                registerHitEvent = 1
             };
         }
     }

@@ -29,6 +29,9 @@ public class MozzarellaRenderer : MonoBehaviour {
         material.SetFloat(pointsScaleID, pointRadius);
     }
     void Update() {
+        if (!mozzarella.visible) {
+            return;
+        }
         // Draw to screen
         Graphics.DrawMeshInstancedProcedural(mesh, 0, material, new Bounds(Vector3.zero, Vector3.one*1000f), mozzarella.numParticles);
     }
