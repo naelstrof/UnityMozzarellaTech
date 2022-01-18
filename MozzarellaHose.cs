@@ -30,7 +30,8 @@ public class MozzarellaHose : BaseStreamer {
             return new Mozzarella.Point() {
                 position = hose.transform.position,
                 prevPosition = hose.transform.position - velocity,
-                volume = volume
+                volume = volume,
+                registerHitEvent = 1
             };
         }
     }
@@ -41,6 +42,7 @@ public class MozzarellaHose : BaseStreamer {
         }
     }
     public override void Update() {
+        mozzarella.SetVisibleUntil(Time.time+5f);
         base.Update();
     }
     public void SetStreamCount(int newStreamCount) {

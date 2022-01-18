@@ -40,7 +40,8 @@ public class MozzarellaSquirter : BaseStreamer {
             return new Mozzarella.Point() {
                 position = squirter.transform.position,
                 prevPosition = squirter.transform.position - velocity,
-                volume = volume
+                volume = volume,
+                registerHitEvent = 1,
             };
         }
     }
@@ -54,6 +55,7 @@ public class MozzarellaSquirter : BaseStreamer {
         }
     }
     public void Squirt() {
+        mozzarella.SetVisibleUntil(Time.time + squirtDuration + 5f);
         for(int i=0;i<squirtCount;i++) {
             streams.Add(new SquirtStream(Time.time, squirtDuration));
         }
