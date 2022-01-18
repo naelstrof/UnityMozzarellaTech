@@ -2,7 +2,7 @@ struct Point {
     float3 position;
     float3 prevPosition;
     float volume;
-	float registerHitEvent;
+    float lastHitTime;
 };
 float _PointScale;
 

@@ -36,7 +36,7 @@ struct Point {
     float3 position;
     float3 prevPosition;
     float volume;
-    float registerHitEvent;
+    float lastHitTime;
 };
 
 #if HIT_EVENTS
@@ -198,11 +198,11 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
 
         #if HIT_EVENTS
         // Register a hit event
-        if (_Points[id.x].registerHitEvent != 0) {
+        if (_Time[0]-_Points[id.x].lastHitTime > 0.5) {
             uint hitID = hash13(newPos)*(_NumHitEvents-1);
             _HitEvents[hitID].position = newPos;
             _HitEvents[hitID].volume = _Points[id.x].volume;
-            _Points[id.x].registerHitEvent = 0;
+            _Points[id.x].lastHitTime = _Time[0];
         }
         #endif
     }

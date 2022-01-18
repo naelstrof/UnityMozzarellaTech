@@ -39,17 +39,18 @@ public class Mozzarella : MonoBehaviour {
         public Vector3 position;
         public Vector3 prevPosition;
         public float volume;
-        public float registerHitEvent;
+        public float lastHitTime;
     }
     private class MozzarellaShaderBlock {
         public int numParticlesID, pointsID, gravityID,
         viscosityID, depthTextureID, worldToCameraID,
         cameraInverseProjectionID, cameraVPID, cameraToWorldID,
         nearClipValueID, cameraDepthID, normalsTextureID,
-        farClipValueID, cameraNormalsID, frictionID, attractionStrengthID,
+        farClipValueID, cameraNormalsID, frictionID, attractionStrengthID, timeID,
         deltaTimeID, mainKernel;
         public MozzarellaShaderBlock(ComputeShader shader) {
             pointsID = Shader.PropertyToID("_Points");
+            timeID = Shader.PropertyToID("_Time");
             deltaTimeID = Shader.PropertyToID("_DeltaTime");
             gravityID = Shader.PropertyToID("_Gravity");
             viscosityID = Shader.PropertyToID("_Viscosity");
@@ -101,6 +102,7 @@ public class Mozzarella : MonoBehaviour {
             return;
         }
         float volume = Mathf.Clamp01(Mathf.Sin(Time.time*5f));
+        verletProcessor.SetVector(shaderProperties.timeID, new Vector4(Time.time,0,0,0));
         verletProcessor.SetBuffer(0, shaderProperties.pointsID, pointsBuffer);
         verletProcessor.SetMatrix(shaderProperties.worldToCameraID, Camera.main.worldToCameraMatrix);
         verletProcessor.SetMatrix(shaderProperties.cameraToWorldID, Camera.main.cameraToWorldMatrix);

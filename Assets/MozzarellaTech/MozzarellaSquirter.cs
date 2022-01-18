@@ -41,7 +41,6 @@ public class MozzarellaSquirter : BaseStreamer {
                 position = squirter.transform.position,
                 prevPosition = squirter.transform.position - velocity,
                 volume = volume,
-                registerHitEvent = 1,
             };
         }
     }
