@@ -22,11 +22,6 @@ public class MozzarellaHose : BaseStreamer {
             MozzarellaHose hose = streamer as MozzarellaHose;
             Vector3 velocity = Vector3.up*0.025f+hose.transform.up*hose.startVelocity+UnityEngine.Random.insideUnitSphere*hose.velocityVariance;
             float volume = Mathf.Clamp01(Mathf.Abs(Mathf.Sin((time+offset)*2f)));
-            if (volume < 0.6f) {
-                volume = 0f;
-            } else {
-                volume = Mathf.Lerp(volume,1f,0.5f);
-            }
             return new Mozzarella.Point() {
                 position = hose.transform.position,
                 prevPosition = hose.transform.position - velocity,
@@ -40,9 +35,9 @@ public class MozzarellaHose : BaseStreamer {
             streams.Add(new HoseStream(i*0.5f));
         }
     }
-    public override void Update() {
+    public override void FixedUpdate() {
         mozzarella.SetVisibleUntil(Time.time+5f);
-        base.Update();
+        base.FixedUpdate();
     }
     public void SetStreamCount(int newStreamCount) {
         streamCount = newStreamCount;

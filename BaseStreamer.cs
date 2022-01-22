@@ -30,7 +30,7 @@ public class BaseStreamer : MonoBehaviour {
     public virtual void Start() {
         lastTime = Time.time;
     }
-    public virtual void Update() {
+    public virtual void FixedUpdate() {
         float particleCount = (Time.time-lastTime)*particlesPerSecondPerStream;
         int neededParticles = Mathf.Min(Mathf.FloorToInt(particleCount), Mathf.FloorToInt(mozzarella.numParticles/Mathf.Max(streams.Count,1))-streams.Count);
         if (neededParticles < 1 || streams.Count == 0) {
@@ -45,6 +45,8 @@ public class BaseStreamer : MonoBehaviour {
                 float timeChunk = (Time.time-lastTime)/(float)neededParticles;
                 stream.points.Add(stream.CreatePoint(this, Time.time+timeChunk*(float)j));
             }
+            // Kill the next point so it doesn't effect things
+            stream.points.Add(new Mozzarella.Point() { volume = 0 });
             if (index+stream.points.Count > mozzarella.numParticles) {
                 int leftHalfCount = mozzarella.numParticles-index;
                 mozzarella.pointsBuffer.SetData<Mozzarella.Point>(stream.points, 0, index, leftHalfCount);

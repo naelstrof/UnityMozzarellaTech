@@ -44,8 +44,8 @@ public class MozzarellaSquirter : BaseStreamer {
             };
         }
     }
-    public override void Update() {
-        base.Update();
+    public override void FixedUpdate() {
+        base.FixedUpdate();
         for(int i=streams.Count-1;i>=0;i--) {
             SquirtStream squirter = streams[i] as SquirtStream;
             if (squirter.IsFinished()) {
