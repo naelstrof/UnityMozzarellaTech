@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0021ca6d997f2a64f8a4a8f0c9cc6660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlesPerSecondPerStream: 60
+  particlesPerSecondPerStream: 70
   squirtDuration: 0.35
   squirtCount: 1
   volumeCurve:
@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numParticles: 2048
   viscosity: 0.85
-  attractionStrength: 5
+  attractionStrength: 3
   friction: 0.15
   verletProcessor: {fileID: 7200000, guid: 066362e12214f6247855da2b05e8cc18, type: 3}
 --- !u!114 &1442396548
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e19e80e87de9740b280ed88bb52114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlesPerSecondPerStream: 60
+  particlesPerSecondPerStream: 200
   startVelocity: 0.08
   velocityVariance: 0.05
   streamCount: 4
