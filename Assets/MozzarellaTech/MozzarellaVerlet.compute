@@ -171,6 +171,7 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
     }
     float3 savedPosition = _Points[id.x].position;
     ComputePointVelocity(_Points[id.x]);
+    _Points[id.x].prevPosition = savedPosition;
     ComputeAttraction(_Points[id.x], _Points[(id.x+1)%(_NumParticles)]);
     ComputeAttraction(_Points[id.x], _Points[(id.x-1+_NumParticles)%(_NumParticles)]);
     ComputePointGravity(_Points[id.x]);
@@ -193,7 +194,7 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
         newPos = project+_Points[id.x].position;
 
         // friction
-        savedPosition = lerp(savedPosition, newPos, _Friction);
+        _Points[id.x].prevPosition = lerp(_Points[id.x].prevPosition, newPos, _Friction);
         _Points[id.x].position = newPos;
 
         #if HIT_EVENTS
@@ -202,12 +203,10 @@ void PointsMain (uint3 id : SV_DispatchThreadID) {
             uint hitID = hash13(newPos)*(_NumHitEvents-1);
             _HitEvents[hitID].position = newPos;
             _HitEvents[hitID].volume = _Points[id.x].volume;
-            _Points[id.x].lastHitTime = _Time[0];
+            _Points[id.x].lastHitTime = _Time[0]+id.x*(1.0/_NumParticles);
         }
         #endif
     }
-
-    _Points[id.x].prevPosition = savedPosition;
 }
 
 [numthreads(64,1,1)]
