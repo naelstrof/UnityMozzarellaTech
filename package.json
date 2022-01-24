@@ -1,7 +1,7 @@
 {
     "name": "com.naelstrof.mozzarellatech",
     "displayName": "Mozzarella Tech",
-    "version": "2.0.8",
+    "version": "2.3.0",
     "unity": "2020.3",
     "dependencies": {
         "com.naelstrof.skinnedmeshdecals": "https://github.com/naelstrof/SkinnedMeshDecals.git#upm"

@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class MozzarellaHitEventListener : MonoBehaviour {
     private Mozzarella mozzarella;
-    [Range(2, 16)]
+    [Range(2, 32)]
     public int hitEventCount = 8;
     private ComputeBuffer hitEventsBuffer;
     private HitEvent[] hitEventsGet;
