@@ -12,6 +12,9 @@ public class MozzarellaHitEventListener : MonoBehaviour {
     private static int hitEventsID;
     private static int clearHitEventKernel;
     private static int hitEventCountID;
+    [SerializeField]
+    [Tooltip("Async callbacks take more memory, but lead to far smoother framerates.")]
+    private bool useAsyncCallbacks = false;
     public struct HitEvent {
         public Vector3 position;
         public float volume;
@@ -41,7 +44,7 @@ public class MozzarellaHitEventListener : MonoBehaviour {
         mozzarella.onPointsUpdated += OnPointsUpdated;
     }
     void OnPointsUpdated() {
-        if (SystemInfo.supportsAsyncGPUReadback) {
+        if (SystemInfo.supportsAsyncGPUReadback && useAsyncCallbacks) {
             AsyncGPUReadback.Request(hitEventsBuffer, sizeof(float)*4*hitEventCount, 0, GetHitEvents);
         } else {
             hitEventsBuffer.GetData(hitEventsGet);
