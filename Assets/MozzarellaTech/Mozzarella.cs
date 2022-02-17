@@ -104,6 +104,9 @@ public class Mozzarella : MonoBehaviour {
         if (Camera.main == null) {
             return;
         }
+        if (!visible) {
+            return;
+        }
         float volume = Mathf.Clamp01(Mathf.Sin(Time.time*5f));
         verletProcessor.SetVector(shaderProperties.timeID, new Vector4(Time.time,0,0,0));
         verletProcessor.SetBuffer(0, shaderProperties.pointsID, pointsBuffer);
